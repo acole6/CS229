@@ -140,8 +140,9 @@ SOURCE CODE:
 
 Programs:
 
-crop.c
-----------------------------------------------------------------------------------------------------------
+##########################################################################################################
+# crop
+##########################################################################################################
 Usage: ./crop infile outfile x y width height
 
 infile - should be a simp file
@@ -155,8 +156,9 @@ This file is the source code for the crop program. It makes use of simp.h in ord
 
 If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully with an error message. This program assumes that the infile will be a simp file and not any other type of file. it also assumes that the simp file width and height will be positive values. The resulting file will be a cropped version of the original simp file bassed on the arguments passed. The resulting file should be a valid simp file. The original file is not altered.
 
-bw.c
-----------------------------------------------------------------------------------------------------------
+##########################################################################################################
+# bw
+##########################################################################################################
 Usage: ./bw infile outfile
 
 infile - should be a simp file
@@ -176,8 +178,9 @@ altered.
 For example, floor((red + green + blue) / 3), where the input in floor is a double/float value. This is not what the 
 actual code looks like, but is the basic idea. 
 
-colorshift.c
-----------------------------------------------------------------------------------------------------------
+##########################################################################################################
+# colorshift
+##########################################################################################################
 Usage: ./colorshift infile outfile pattern
 
 infile - should be a simp file
@@ -200,8 +203,9 @@ Explanation of the color shift:
 If the pattern given is RGB, then red replaces green, green replaces blue and blue replaces red. If the pattern given
 is RG, then red is swapped with green.
 
-overlay.c
-----------------------------------------------------------------------------------------------------------
+##########################################################################################################
+# overlay
+##########################################################################################################
 Usage: ./overlay bottomfile topfile outfile x y
 
 bottomfile - should be a simp file and will have the topfile overlaid on it
@@ -242,8 +246,9 @@ Below is an example:
 +          +
 ------------
 
-meme.c
-----------------------------------------------------------------------------------------------------------
+##########################################################################################################
+# meme
+##########################################################################################################
 Usage: ./meme meme_file action_file
 
 meme_file - meme file with a list of memes
