@@ -18,18 +18,9 @@ struct simp
 };
 typedef struct simp simp_t;
 
-I created a type called simp_t that represents my simp structure, which has an integer to store the width,
-an integer to store the height and another type I created to called pixel_t that stores a 2D array of pixels.
+I created a type called simp_t that represents my simp structure, which has an integer to store the width, an integer to store the height and another type I created to called pixel_t that stores a 2D array of pixels.
 
-I settled on integers for width and height but originally had longs and thought about using unsigned integers.
-I figured we most likely would not be tested on insanely large images (hoping I am not wrong) and that the simp
-file width and height would always be positive. It would not make much sense to have a negative width and height
-for the simp files the way they were described in the spec.
-
-My pixel_t type is made up of a struct pixel that has an array of unsigned chars to store the pixel color. 0 is the 
-red channel, 1 is the green channel, 2 is the blue channel and 3 is the alpha channel. I originally had 4 separate 
-chars, which made it more obvious what channel was what, but the array makes it easier to write code with less 
-lines (i.e. loops and passings the color as a parameter).
+My pixel_t type is made up of a struct pixel that has an array of unsigned chars to store the pixel color. 0 is the red channel, 1 is the green channel, 2 is the blue channel and 3 is the alpha channel. I originally had 4 separate chars, which made it more obvious what channel was what, but the array makes it easier to write code with less lines (i.e. loops and passings the color as a parameter).
 
 ACT FILE DATA STOREAGE:
 
@@ -52,8 +43,7 @@ struct act
 };
 typedef struct act act_t;
 
-For the action file, I created two structs to store the data in the file. The line struct stores the text ids, like top, bottom, etc. and the value
-is the actual text that will get overlaid. The act struct stores multiple line structs, as well as the outfile, the meme and the font.
+For the action file, I created two structs to store the data in the file. The line struct stores the text ids, like top, bottom, etc. and the value is the actual text that will get overlaid. The act struct stores multiple line structs, as well as the outfile, the meme and the font.
 
 FSF FILE DATA STORAGE:
 
@@ -77,8 +67,7 @@ struct fsf
 };
 typedef struct fsf fsf_t;
 
-For the font file, I created two structs to store the data in the file. The character struct stores the character and, as well as the x pos, the y pos,
-the width and the height in an int array. The fsf struct has an array of characters, as well as the name and the image.
+For the font file, I created two structs to store the data in the file. The character struct stores the character and, as well as the x pos, the y pos, the width and the height in an int array. The fsf struct has an array of characters, as well as the name and the image.
 
 MEM FILE DATA STORAGE:
 
@@ -118,39 +107,25 @@ struct mem
 };
 typedef struct mem mem_t;
 
-For the meme file, I created four structs to store the data. The point struct, just stores the x and y pos. The position
-struct stores the text id, as well as the point for the text to start. The meme struct stores the name of the meme, the
-file of the meme and the number of text ids. The mem struct stores an array of memes and an array of fonts available.
+For the meme file, I created four structs to store the data. The point struct, just stores the x and y pos. The position struct stores the text id, as well as the point for the text to start. The meme struct stores the name of the meme, the file of the meme and the number of text ids. The mem struct stores an array of memes and an array of fonts available.
 
 ASSUMPTIONS:
 1. that it would be okay to deal with width and height as (signed) integers
 2. 2D array was okay to store up to two images in memory (or image file sizes would not be too large)
-3. rounding the average in bw and the channel calculations in overlay was not necessary. I essentially used floor by 
-casting double values to an integer
-and would pass the compare tests with 0 significantly different bytes. I did run tests to make sure those files were 
-indeed producing non-whole numbers.
-4. that it was okay to assign default values if x, y, width or height values were not given on the command line. I 
-default x and y to 0 if there were not given or if something was typed in for them that was not a number. I assume the 
-image width and height for width and height if they were not given on the command line. If the width and height are not 
-numbers, I print an error because 0 is not acceptable for a width and height for a simp file.
+3. rounding the average in bw and the channel calculations in overlay was not necessary. I essentially used floor by casting double values to an integer and would pass the compare tests with 0 significantly different bytes. I did run tests to make sure those files were indeed producing non-whole numbers.
+4. that it was okay to assign default values if x, y, width or height values were not given on the command line. I default x and y to 0 if there were not given or if something was typed in for them that was not a number. I assume the numbers, I print an error because 0 is not acceptable for a width and height for a simp file.
 5. I assumed that the ranges for width and height of a simple file are 1 to width and 1 to height, respectively
 6. I assumed that arguments must be given for in files and out files or the program will produce an error message
-7. assumed that only simp files would be read by the programs due to no chunk ids in the simp files. (it is hard to tell 
-what a binary file is without chunk ids)
-8. I assumed it was okay to produce an error if the number of pixels ended up being less than specified in the file. 
-Conversely, I ignore the extra bytes if there are more bytes after the specified number of pixels have been read. 
-9. For overlay, I assumed that the image placed on top would not extend the bottom image, but only cover the bottom image 
-as much as it can within the confines if the bottom image's width and height.
+7. assumed that only simp files would be read by the programs due to no chunk ids in the simp files. (it is hard to tell what a binary file is without chunk ids)
+8. I assumed it was okay to produce an error if the number of pixels ended up being less than specified in the file. Conversely, I ignore the extra bytes if there are more bytes after the specified number of pixels have been read. 
+9. For overlay, I assumed that the image placed on top would not extend the bottom image, but only cover the bottom image as much as it can within the confines if the bottom image's width and height.
 10. assumed that extra arguments passed beyond what is required of the program should be ignored
 
 NEW ASSUMPTIONS:
-11. Text should be centered and if the text goes over the width of the image in either direction, the overlay function
-will only display what fits on the image.
+11. Text should be centered and if the text goes over the width of the image in either direction, the overlay function will only display what fits on the image.
 12. Any variable will only be defined once
-13. variable will always be var1 var2: value  with no leading space before variables, one space between variables and no whitespace
-before the :
-14. Negative numbers in the meme and font file will not cause reading the file to fail. the meme program will take these into
-account when cropping the font letters.
+13. variable will always be var1 var2: value  with no leading space before variables, one space between variables and no before the :
+14. Negative numbers in the meme and font file will not cause reading the file to fail. the meme program will take these into account when cropping the font letters.
 15. positions that are in the action but not in meme will be ignore and vice versa.
 16. the center formula is total width/2 + center pos, where the result of total width/2 is floored.
 17. if the file is missing a specific required variable, the read will fail and exit cleanly.
@@ -158,9 +133,7 @@ account when cropping the font letters.
 19. the value portion of the line should be trimmed for leading and trailing whitespace.
 20. there will be no tabs or carriage returns
 21. variables would not be more than 2 deep, so var1 var2 var3 will not be given.
-22. it is okay to generate an image with only the found positions and found characters instead of just exited with an error.
-For example if center was specified in action but not in meme, then center would not get displayed. Also if A was not in the font,
-then no A would appear in the text on the image, even if the phrase contained A's.
+22. it is okay to generate an image with only the found positions and found characters instead of just exited with an error. For example if center was specified in action but not in meme, then center would not get displayed. Also if A was not in the font, then no A would appear in the text on the image, even if the phrase contained A's.
 23. Like the spec said, all characters will always have the same height and we will not be tested on characters having different heights
 
 SOURCE CODE:
@@ -175,23 +148,12 @@ infile - should be a simp file
 outfile - any valid filename. if it is an existing file, it will be overwritten (hopefully it wasn't important)
 x - staring position for cropping. range is 0 to width - 1
 y - starting position for cropping. range is 0 to height - 1
-width - the width of the resulting cropped file. range is from 1 to width - x. this is in order to not exceed the original 
-image's bounds
-height - the height of the resulting cropped file. range is from 1 to height - y. this is in order to not exceed the 
-original image's bounds
+width - the width of the resulting cropped file. range is from 1 to width - x. this is in order to not exceed the original image's bounds
+height - the height of the resulting cropped file. range is from 1 to height - y. this is in order to not exceed the original image's bounds
 
-This file is the source code for the crop program. It makes use of simp.h in order to crop a file 
-given the specified dimensions. If all goes well, crop produces a cropped image. The program will exit gracefully if the 
-program is given invalid settings. x and y have default values of 0 if not given or if something that is not a number is 
-given in their place. If width and height are not given, they have a default value of the original image's width and
-height. If the a something that is not a number is given for the width and height, the program will exit gracefully
-due to the width and height value will get converted to 0 and that is outside of the 1 to width/height - x/y range.
+This file is the source code for the crop program. It makes use of simp.h in order to crop a file given the specified dimensions. If all goes well, crop produces a cropped image. The program will exit gracefully if the program is given invalid settings. x and y have default values of 0 if not given or if something that is not a number is given in their place. If width and height are not given, they have a default value of the original image's width and height. If the argument given is not a number for the width or height, the program will exit gracefully due to the width and height value will get converted to 0 and that is outside of the 1 to width/height - x/y range.
 
-If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully with an error
-message. This program assumes that the infile will be a simp file and not any other type of file. it also assumes that
-the simp file width and height will be positive values. The resulting file will be a cropped version of the original
-simp file bassed on the arguments passed. The resulting file should be a valid simp file. The original file is not 
-altered.
+If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully with an error message. This program assumes that the infile will be a simp file and not any other type of file. it also assumes that the simp file width and height will be positive values. The resulting file will be a cropped version of the original simp file bassed on the arguments passed. The resulting file should be a valid simp file. The original file is not altered.
 
 bw.c
 ----------------------------------------------------------------------------------------------------------
