@@ -1,6 +1,8 @@
 Alex Cole acole6 Com S 229 Project 1
 
-SIMP IMAGE DATA STORAGE:
+##########################################################################################################
+# SIMP IMAGE DATA STORAGE
+##########################################################################################################
 
 /*struct to store 32-bit pixel info. 0 - red, 1 - green, 2 - blue, 3 - alpha*/
 struct pixel
@@ -22,7 +24,9 @@ I created a type called simp_t that represents my simp structure, which has an i
 
 My pixel_t type is made up of a struct pixel that has an array of unsigned chars to store the pixel color. 0 is the red channel, 1 is the green channel, 2 is the blue channel and 3 is the alpha channel. I originally had 4 separate chars, which made it more obvious what channel was what, but the array makes it easier to write code with less lines (i.e. loops and passings the color as a parameter).
 
-ACT FILE DATA STOREAGE:
+##########################################################################################################
+# ACT FILE DATA STOREAGE
+##########################################################################################################
 
 /*struct stores text id and the text in value*/
 struct line
@@ -45,7 +49,9 @@ typedef struct act act_t;
 
 For the action file, I created two structs to store the data in the file. The line struct stores the text ids, like top, bottom, etc. and the value is the actual text that will get overlaid. The act struct stores multiple line structs, as well as the outfile, the meme and the font.
 
-FSF FILE DATA STORAGE:
+##########################################################################################################
+# FSF FILE DATA STORAGE
+##########################################################################################################
 
 /*struct to store character data. ch is the character
 position[0] is the x pos, position[1] is the y pos, 
@@ -109,7 +115,10 @@ typedef struct mem mem_t;
 
 For the meme file, I created four structs to store the data. The point struct, just stores the x and y pos. The position struct stores the text id, as well as the point for the text to start. The meme struct stores the name of the meme, the file of the meme and the number of text ids. The mem struct stores an array of memes and an array of fonts available.
 
-ASSUMPTIONS:
+##########################################################################################################
+# ASSUMPTIONS
+##########################################################################################################
+
 1. that it would be okay to deal with width and height as (signed) integers
 2. 2D array was okay to store up to two images in memory (or image file sizes would not be too large)
 3. rounding the average in bw and the channel calculations in overlay was not necessary. I essentially used floor by casting double values to an integer and would pass the compare tests with 0 significantly different bytes. I did run tests to make sure those files were indeed producing non-whole numbers.
@@ -120,8 +129,6 @@ ASSUMPTIONS:
 8. I assumed it was okay to produce an error if the number of pixels ended up being less than specified in the file. Conversely, I ignore the extra bytes if there are more bytes after the specified number of pixels have been read. 
 9. For overlay, I assumed that the image placed on top would not extend the bottom image, but only cover the bottom image as much as it can within the confines if the bottom image's width and height.
 10. assumed that extra arguments passed beyond what is required of the program should be ignored
-
-NEW ASSUMPTIONS:
 11. Text should be centered and if the text goes over the width of the image in either direction, the overlay function will only display what fits on the image.
 12. Any variable will only be defined once
 13. variable will always be var1 var2: value  with no leading space before variables, one space between variables and no before the :
@@ -136,7 +143,9 @@ NEW ASSUMPTIONS:
 22. it is okay to generate an image with only the found positions and found characters instead of just exited with an error. For example if center was specified in action but not in meme, then center would not get displayed. Also if A was not in the font, then no A would appear in the text on the image, even if the phrase contained A's.
 23. Like the spec said, all characters will always have the same height and we will not be tested on characters having different heights
 
-SOURCE CODE:
+##########################################################################################################
+# SOURCE CODE
+##########################################################################################################
 
 Programs:
 
@@ -164,19 +173,11 @@ Usage: ./bw infile outfile
 infile - should be a simp file
 outfile - any valid filename. if it is an existing file, it will be overwritten (hopefully it wasn't important)
 
-This file is the source code for the bw program. It makes use of simp.h in order to convert a simp 
-file to black and white. If all goes well, bw produces a black and white image. The program will exit gracefully if the 
-program is given invalid settings.
+This file is the source code for the bw program. It makes use of simp.h in order to convert a simp file to black and white. If all goes well, bw produces a black and white image. The program will exit gracefully if the program is given invalid settings.
 
-If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully with an error
-message. This program assumes that the infile will be a simp file and not any other type of file. it also assumes that
-the simp file width and height will be positive values. The resulting file will be a black and white version of the 
-original simp file. The resulting file should be a valid simp file. The black and white values are are calculated
-by taking the average of each pixels red, blue and green channels and flooring the result. The original file is not 
-altered.
+If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully with an error message. This program assumes that the infile will be a simp file and not any other type of file. it also assumes that the simp file width and height will be positive values. The resulting file will be a black and white version of the original simp file. The resulting file should be a valid simp file. The black and white values are are calculated by taking the average of each pixels red, blue and green channels and flooring the result. The original file is not altered.
 
-For example, floor((red + green + blue) / 3), where the input in floor is a double/float value. This is not what the 
-actual code looks like, but is the basic idea. 
+For example, floor((red + green + blue) / 3), where the input in floor is a double/float value. This is not what the actual code looks like, but is the basic idea. 
 
 ##########################################################################################################
 # colorshift
@@ -187,21 +188,12 @@ infile - should be a simp file
 outfile - any valid filename. if it is an existing file, it will be overwritten (hopefully it wasn't important)
 pattern - string in the form of one of the following: RGB GBR BRG RBG BGR GRB RG GR RB BR GB BG
 
-This file is the source code for the colorshift program. It makes use of simp.h in order to shift 
-the color channels values of a given simp file. If all goes well, colorshift produces an image with its color channels
-shift based on the given pattern. The program will exit gracefully if the program is given invalid settings. If the 
-pattern does not match one of the patterns listed above, the program will exit gracefully with and error message
-stating that the pattern is invalid. The pattern must be given as all upper case letters with no spaces or characters 
-between the letters.
+This file is the source code for the colorshift program. It makes use of simp.h in order to shift the color channels values of a given simp file. If all goes well, colorshift produces an image with its color channels shift based on the given pattern. The program will exit gracefully if the program is given invalid settings. If the pattern does not match one of the patterns listed above, the program will exit gracefully with and error message stating that the pattern is invalid. The pattern must be given as all upper case letters with no spaces or characters between the letters.
 
-If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully with an error
-message. This program assumes that the infile will be a simp file and not any other type of file. it also assumes that
-the simp file width and height will be positive values. The resulting file will be a shifted version of the 
-original simp file. The resulting file should be a valid simp file. The original file is not altered.
+If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully with an error message. This program assumes that the infile will be a simp file and not any other type of file. it also assumes that the simp file width and height will be positive values. The resulting file will be a shifted version of the original simp file. The resulting file should be a valid simp file. The original file is not altered.
 
 Explanation of the color shift:
-If the pattern given is RGB, then red replaces green, green replaces blue and blue replaces red. If the pattern given
-is RG, then red is swapped with green.
+If the pattern given is RGB, then red replaces green, green replaces blue and blue replaces red. If the pattern given is RG, then red is swapped with green.
 
 ##########################################################################################################
 # overlay
@@ -214,19 +206,11 @@ outfile - any valid filename. if it is an existing file, it will be overwritten 
 x - staring in bottomfile image for the topfile image to be overlaid on. range is 0 to width - 1
 y - staring in bottomfile image for the topfile image to be overlaid on. range is 0 to height - 1
 
-This file is the source code for the overlay program. It makes use of simp.h in order to overlay a
-simp file image on top of another simple image given the specified dimensions. If all goes well, overlay produces an image
-with the top image overlaid on the bottom. The program will exit gracefully if the program is given invalid settings. 
-x and y have default values of 0 if not given or if something that is not a number is given in their place.
+This file is the source code for the overlay program. It makes use of simp.h in order to overlay a simp file image on top of another simple image given the specified dimensions. If all goes well, overlay produces an image with the top image overlaid on the bottom. The program will exit gracefully if the program is given invalid settings. x and y have default values of 0 if not given or if something that is not a number is given in their place.
 
-If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully with an error
-message. This program assumes that the infile will be a simp file and not any other type of file. it also assumes that
-the simp file width and height will be positive values. The resulting file will be an image with the top image overlaid on
-the bottom image. The resulting file should be a valid simp file. The original bottomfile and topfile will not be altered.
+If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully with an error message. This program assumes that the infile will be a simp file and not any other type of file. it also assumes that the simp file width and height will be positive values. The resulting file will be an image with the top image overlaid on the bottom image. The resulting file should be a valid simp file. The original bottomfile and topfile will not be altered.
 
-Overlay will not exceed or extend the width and height of the bottom image, so if the top image happens to go beyond the
-bounds of the bottom image, the portion of the top image beyond the bounds will not be overlaid on top of the bottom image.
-Below is an example:
+Overlay will not exceed or extend the width and height of the bottom image, so if the top image happens to go beyond the bounds of the bottom image, the portion of the top image beyond the bounds will not be overlaid on top of the bottom image. Below is an example:
 
 ------------    	    ------------
 +          +                +  bottom  +
@@ -254,32 +238,25 @@ Usage: ./meme meme_file action_file
 meme_file - meme file with a list of memes
 action_file - action file used to generate a meme
 
-This file is the source code for the meme program. It makes use of simp.h, act.h, mem.h, fsf.h and utility.h in order
-generate a meme. It reads a meme file and an action file in order to generate the meme. The files are stored in separate
-structs and the action file is used to find which meme to overlay on image. To overlay the font, the functions from the
-crop and overlay program are used. The program is designed not to fail if positions in the action file are not in the
-meme file or if characters in the phrases overlaid on the image are not in the font file. In those cases a meme will
-still be generated with the the information that the action file was able to find from the meme and font files. 
+This file is the source code for the meme program. It makes use of simp.h, act.h, mem.h, fsf.h and utility.h in order generate a meme. It reads a meme file and an action file in order to generate the meme. The files are stored in separate structs and the action file is used to find which meme to overlay on image. To overlay the font, the functions from the crop and overlay program are used. The program is designed not to fail if positions in the action file are not in the meme file or if characters in the phrases overlaid on the image are not in the font file. In those cases a meme will still be generated with the the information that the action file was able to find from the meme and font files. 
 
 Helper Code:
 
 simp.h
 ----------------------------------------------------------------------------------------------------------
-This is a header file that has the structs described at the beginning of this document that are used to store the data
-within a simp file. Also in this file are function prototypes that are associated with reading simp files and making
-use of the simp file data stored in the simp data structures.
+This is a header file that has the structs described at the beginning of this document that are used to store the data within a simp file. Also in this file are function prototypes that are associated with reading simp files and making use of the simp file data stored in the simp data structures.
 
 simp.c
 ----------------------------------------------------------------------------------------------------------
-This is the implementation of the function prototypes in the header file simp.h. The functions in this file are designed
-to help read and write simp files, as well make use of the data stored in simp file data structures after a simp file
-is read.
+This is the implementation of the function prototypes in the header file simp.h. The functions in this file are designed to help read and write simp files, as well make use of the data stored in simp file data structures after a simp file is read.
+
+##########################################################################################################
+# action
+##########################################################################################################
 
 act.h
 ----------------------------------------------------------------------------------------------------------
-This is a header file that has the structs described at the beginning of this document that are used to store the data
-within a act file. Also in this file are function prototypes that are associated with reading act files and making
-use of the act file data stored in the act data structures.
+This is a header file that has the structs described at the beginning of this document that are used to store the data within a act file. Also in this file are function prototypes that are associated with reading act files and making use of the act file data stored in the act data structures.
 
 act.c
 ----------------------------------------------------------------------------------------------------------
@@ -287,17 +264,21 @@ This is the implementation of the function prototypes in the header file act.h. 
 to help read act files, as well make use of the data stored in act file data structures after an act file
 is read.
 
+##########################################################################################################
+# font
+##########################################################################################################
+
 fsf.h
 ----------------------------------------------------------------------------------------------------------
-This is a header file that has the structs described at the beginning of this document that are used to store the data
-within a fsf file. Also in this file are function prototypes that are associated with reading fsf files and making
-use of the fsf file data stored in the act data structures.
+This is a header file that has the structs described at the beginning of this document that are used to store the data within a fsf file. Also in this file are function prototypes that are associated with reading fsf files and making use of the fsf file data stored in the act data structures.
 
 fsf.c
 ----------------------------------------------------------------------------------------------------------
-This is the implementation of the function prototypes in the header file fsf.h. The functions in this file are designed
-to help read fsf files, as well make use of the data stored in fsf file data structures after a fsf file
-is read.
+This is the implementation of the function prototypes in the header file fsf.h. The functions in this file are designed to help read fsf files, as well make use of the data stored in fsf file data structures after a fsf file is read.
+
+##########################################################################################################
+# meme
+##########################################################################################################
 
 mem.h
 ----------------------------------------------------------------------------------------------------------
@@ -307,9 +288,11 @@ use of the mem file data stored in the mem data structures.
 
 mem.c
 ----------------------------------------------------------------------------------------------------------
-This is the implementation of the function prototypes in the header file mem.h. The functions in this file are designed
-to help read mem files, as well make use of the data stored in mem file data structures after a mem file
-is read.
+This is the implementation of the function prototypes in the header file mem.h. The functions in this file are designed to help read mem files, as well make use of the data stored in mem file data structures after a mem file is read.
+
+##########################################################################################################
+# utility
+##########################################################################################################
 
 utility.h
 ----------------------------------------------------------------------------------------------------------
@@ -319,9 +302,8 @@ utility.c
 ----------------------------------------------------------------------------------------------------------
 This is the implementation of the prototypes in utility.h
 
-TODO:
+##########################################################################################################
+# TODO
+##########################################################################################################
 
-I would like to clean my code up more so that it is even easier to read. Parsing the text files looks sloppy at points, so I would
-like to make that nicer. Create more functions and organize the code in a nicer way. Also I would like to redesign many of 
-the functions to make sure it is easier to keep track of when memory needs to be freed to prevent seg faults and leaks. And of 
-course, do more testing and add more checks for potential errors.
+I would like to clean my code up more so that it is even easier to read. Parsing the text files looks sloppy at points, so I would like to make that nicer. Create more functions and organize the code in a nicer way. Also I would like to redesign many of the functions to make sure it is easier to keep track of when memory needs to be freed to prevent seg faults and leaks. And of course, do more testing and add more checks for potential errors.
