@@ -75,7 +75,9 @@ typedef struct fsf fsf_t;
 
 For the font file, I created two structs to store the data in the file. The character struct stores the character and, as well as the x pos, the y pos, the width and the height in an int array. The fsf struct has an array of characters, as well as the name and the image.
 
-MEM FILE DATA STORAGE:
+##########################################################################################################
+# MEM FILE DATA STORAGE
+##########################################################################################################
 
 /*point struct to store width (x) and height (y)*/
 struct point
