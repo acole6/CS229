@@ -3,7 +3,7 @@
 
 all: meme crop bw colorshift overlay
 
-#build meme executable
+# build meme executable
 
 meme: meme.o simp.o act.o fsf.o mem.o utility.o
 	gcc -ansi -pedantic -o meme meme.o simp.o act.o fsf.o mem.o utility.o
