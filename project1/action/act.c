@@ -55,7 +55,7 @@ void find_text_ids(FILE *ifp, act_t *action)
 	{
 		char *temp;
 		size_t length;
-		if(i >= action->num_ids) { break; }
+		if(i >= action->num_ids) break;
 		
 		length = strlen(line) + 1;
 		temp = (char*) malloc(sizeof(char) * length);
@@ -66,7 +66,7 @@ void find_text_ids(FILE *ifp, act_t *action)
 		trim(&variable);
 
 		value = strstr(temp, ":"); /*makes sure text can have ':' in it*/
-		if(value != NULL && value[0] == ':') { value[0] = ' '; }
+		if(value != NULL && value[0] == ':') value[0] = ' ';
 		trim(&value);
 		if(is_valid_line(variable, value) && strcasecmp(variable, "OUTFILE") && strcasecmp(variable, "MEME") && strcasecmp(variable, "FONT"))
 		{
