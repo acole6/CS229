@@ -58,7 +58,7 @@ Button functionality:
 -Restart - This will reset the simulation to generation 0 based on the initial cells of the automaton. If the simulation was started, this will cause it to stop but will not alter the delay value or grid size.
 -Play    - This will start the simulation based on the delay value. The slider can be adjusted and so can the value in the delay box and the simulation delay will be updated as the simulation continues. Once the simulation has been started, it stopped by pressing Restart, Quit or Step. The simulation simulates one generation at a time.
 -Step    - This will simulate one generation and then update the GuiWidget. If the simulation was started, this will stop it but will not alter the delay or grid size.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 ASSUMPTIONS:
 
 1. that wrap around meant that if the window was expanded past the terrain values, it would print a wrapped around version of the terrain
@@ -83,7 +83,7 @@ ASSUMPTIONS:
 13. that both the B and the S must be present in the life-like rule.
 14. that B/S rule is invalid, but that duplicates are okay and will just be ignored i.e. B00001/S23333 will be treated like B01/S23
 15. that there would not be more than one of any of the identifiers in the automaton fie. If there are, though, mine will grab the most recent identifier value.
-----------------------------------------------------------------------------------------------------------------------	 
+-----------------------------------------------------------------------------------------------------------	 
 SOURCE CODE:
 
 Programs:
@@ -110,7 +110,7 @@ Supported switches:
 Window values whether given in input on or command line with take precedence over terrain values when world is displayed as ascii characters. By default output is in the form of -v flag and a name is not required for input.
 
 The terrain wraps around, so if window is beyond terrain ranges, the terrain will wrap around and be printed to fill the window ranges.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 
 lifegui.cc
 
@@ -142,181 +142,164 @@ Button functionality:
 -Delay box and slider adjusts the delay between generations in simulation
 
 Window values whether given in input on or command line with take precedence over terrain values when world is displayed. The terrain wraps around, so if window is beyond terrain ranges, the terrain will wrap around and be printed to fill the window ranges
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 
 Source:
 
 cell.cc
 
 Implements cell.h. This class keeps track of cell x and y positions, as well as the State of the cell. 
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 chars.cc
 Implements chars.h. This is an abstract class that stores automaton chars. It has a default character value. It is extended by BrianChars, LifeChars and ElemetnaryChars.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 brianchars.cc
 Implements brianchars.h. Brian's Brain chars, which are refactory (default), ready and firing.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 lifechars.cc
 Implements  lifechars.h. Life-like chars, which are dead (default) and alive.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 elementarychars.cc
 Implements elementarychars.h. Elementary chars, which are zero (default) and one.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 color.cc
 Implements color.h This class stores a color in an int vector where position 0 is red, 1 is green and 2 is blue
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 colors.cc
 Implements colors.h This is an abstract class that stores automaton colors. It has a default color value. It is extended by BrianColors, LifeColors and ElemetnaryColors.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 briancolors.cc
 Implements briancolors.h. Brian's Brain colors, which are refactory (default), ready and firing.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 lifecolors.cc
 Implemetns lifecolors.h. Life-like colors, which are dead (default) and alive.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 elementarycolors.cc
 Implements elementarycolors.h. Elemetnary colors, which are zero (default) and one.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 initial.cc
 Implements initial.h. This is an abstract class that stores automaton initial cells. It is extended by BrianInitial, LifeInitial and ElemetnaryInitial.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 brianintial.cc
 Implements brianinitial.h. Brian's Brain initial cells, which could be made up of ready and/or firing cells.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 lifeinitial.cc
 Implements lifeinitial.h. Life-like initial cells, which can only be made up of alive cells.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 elementaryinitial.cc
 Implements elemetnaryinitial. Elementary initial cells, which can only be made up of one cells.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 cellularautomaton.cc
 Implements cellularautomaton.h. Abstract cellular automaton class.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 ruleautomaton.cc
 Implements ruleautoamton.h Abstract rule cellular automaton class. This extends CellularAutomaton. It is a type of cellular automaton that can have a rule that changes.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 brian.cc
 Implements brian.h. Brian's Brain automaton. This extends CellularAutomaton.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 lifeclass.cc
 Implements lifeclass.h. Life-like automaton. This extends RuleAutomaton. Its rule is in the form of B01.../S01... where the values can be 0-8 (inclusive).
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 elementary.cc
 Implements elementary.h Elemetnary automaton. This extends RuleAutomaton. Its rule is a number between 0-255 (inclusive).
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 automatonparser.cc
 Implements automatonarser.h. This class parses though a automaton file that has been stripped of comments and whitespace and breaks it up into key-value pairs or identifier-value pairs
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 range.cc
 Implements range.h. This class stores values from wither a terrain struct or window struct. Its values can be updated based on command line values
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 settings.cc
 Implements settings.h This class keeps track of all the settings entered in on the command line and makes it easier for the programs to access them. Also strips the info in the life file or from standard input of comments and whitespace.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 world.cc
 Implements world.h. This class creates a grid to represent a life to be simulated through multiple generations. It uses a cellular automaton to create the world and stores it into a vector of Cell vectors like a 2D array. It updates the automaton with non-default cells once the simulation is over and is used to print out the grid in ascii or the gui by either using the terrain or window ranges.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 lifewidget.cc
 Implements lifewidget.h. This class extends QWidget and is used to paint the world by terrain or window ranges onto a window to be displayed.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 control.cc
 Implements control.h This is a control dialog box used to manipulate the GuiWidget and simulate through the generations of a cellular automaton.
-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 
 Header Files:
 
 cell.h
 Cell class description and function prototypes. An enum class called State is included in this file. Enums: DEFAULT, ALIVE, ONE, READY, and FIRING
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 chars.h
 Chars class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 brianchars.h
 BrianChars class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 lifechars.h
 LifeChars class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 elemetnarychars.h
 ElementaryChars class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 color.h
 Color class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 colors.h
 Colors class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 briancolors.h
 BrianChars class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 lifecolors.h
 LifeChars class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 elementarycolors.h
 ElementaryChars class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 initial.h
 Initial class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 brianinitial.h
 BrianInitial class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 lifeinitial.h
 LifeInitial class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 elementaryinitial.h
 ElementaryInitial class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 cellularautomon.h
 CellularAutomaton class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 ruleautomaton.h
 RuleAutomaton class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 brian.h
 Brian class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 lifeclass.h
 Life class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 elementary.h
 Elementary class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 automatonparser.h
 AutomatonParser class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 range.h
 Range class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 settings.h
 Settings class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
-world.h
+-----------------------------------------------------------------------------------------------------------
 World class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 lifewidget.h
 GuiWidget class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 control.h
 Control class description and function prototypes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 
-EXTRA FEATURES:
-
-I attached three test cases.
-
-comments as identifier values
-Expected: Exception due to file is not in proper format.
-
-more than one terrain struct
-Expected: Terrain x and y range to both be -100..100
-
-Non-automaton identifiers in file that follow the rules of an automaton file.
-Expected: ./life ExtraIdentifiers.life -f will result in a file that looks like a0.life and ignore the extra non-automaton identifiers.
-
-Did not add any extra features to the programs that I am aware of.
---------------------------------------------------------------------------------------------------------------------------------------------------
 TODO:
 
-Get rid of any memory leaks, clean up code and make more functions. See if I can make the Qt classes nicer.
-Think about redoing some code to make use of references. And always, fix bugs and test more.
+Get rid of any memory leaks, clean up code and make more functions. See if I can make the Qt classes nicer. Think about redoing some code to make use of references. And always, fix bugs and test more.
