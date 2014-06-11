@@ -14,7 +14,7 @@
 */
 void trim(char **str)
 {
-	if(*str == NULL) { return; }
+	if(*str == NULL) return;
 	left_trim(str);
 	right_trim(str);
 }
