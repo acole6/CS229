@@ -151,7 +151,7 @@ int fill_meme_positions(FILE *ifp, mem_t *meme)
 		fseek(ifp, 0, SEEK_SET);
 		while(fgets(line, sizeof(line), ifp) != NULL)
 		{
-			if(j >= meme->memes[i].num_pos) { break; }
+			if(j >= meme->memes[i].num_pos) break;
 
 			variable = strtok(line, ":");
 			trim(&variable);
@@ -286,10 +286,7 @@ position_t* get_position(position_t *positions, int length, char *name)
 
 	for(i = 0; i < length; i++)
 	{
-		if(!strcasecmp(positions[i].name, name))
-		{
-			return &positions[i];
-		}
+		if(!strcasecmp(positions[i].name, name)) return &positions[i];
 	}
 	return NULL;
 }
@@ -382,10 +379,7 @@ meme_t get_meme(mem_t *memes, char *target)
 
 	for(i = 0; i < memes->num_memes; i++)
 	{
-		if(!strcasecmp(memes->memes[i].name, target))
-		{
-			return memes->memes[i];
-		}
+		if(!strcasecmp(memes->memes[i].name, target)) return memes->memes[i];
 	}
 	initialize_meme(&ret);
 	return ret;
