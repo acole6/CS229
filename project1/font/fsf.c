@@ -25,10 +25,7 @@ void character_count(FILE *ifp, int *count)
 	{
 		variable = strtok(line, ":");
 		trim(&variable);
-		if(variable != NULL && !strncasecmp(variable, "CHARACTER", 9))
-		{
-			(*count)++;
-		}
+		if(variable != NULL && !strncasecmp(variable, "CHARACTER", 9)) (*count)++;
 	}
 }
 
@@ -54,7 +51,7 @@ int fill_characters(FILE *ifp, fsf_t *font)
 		value = strtok(NULL, ":");
 		trim(&value);
 
-		if(i >= font->num_characters) { break; }
+		if(i >= font->num_characters) break;
 
 		if(is_valid_line(variable, value) && !strncasecmp(variable, "CHARACTER", 9))
 		{
@@ -167,10 +164,7 @@ character_t* get_character(character_t *characters, int length, char ch)
 	int i;
 	for(i = 0; i < length; i++)
 	{
-		if(characters[i].ch == ch)
-		{
-			return &characters[i];
-		}
+		if(characters[i].ch == ch) return &characters[i];
 	}
 	return NULL;
 }
@@ -193,10 +187,7 @@ int get_phrase_width(character_t *characters, int length, char *phrase)
 	for(i = 0; i < phrase_length; i++)
 	{
 		character = get_character(characters, length, phrase[i]);
-		if(character != NULL)
-		{
-			width += character->position[2];
-		}
+		if(character != NULL) width += character->position[2];
 	}
 	return width;
 }
