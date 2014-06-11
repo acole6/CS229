@@ -75,7 +75,7 @@ int read_simp_file(char *filename, simp_t *image)
 	image->height = ((int)buffer[0]) | ((int)buffer[1] << 8) | ((int)buffer[2] << 16) | ((int)buffer[3] << 24);
 
 	allocate_pixels(image);
-	if(fill_pixels(in, filename, image) != 0) { return 1; }
+	if(fill_pixels(in, filename, image) != 0) return 1;
 
 	fclose(in);
 	return 0;
