@@ -21,10 +21,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	
-	if(read_mem_file(argv[1], &memes) != 0) 
-	{ 
-		return 1; 
-	}
+	if(read_mem_file(argv[1], &memes) != 0) return 1; 
 	
 	if(read_act_file(argv[2], &action) != 0) 
 	{ 
