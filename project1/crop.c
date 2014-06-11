@@ -19,10 +19,10 @@ int main(int argc, char*argv[])
 	}
 	
 	/*reads simp file info*/	
-	if(read_simp_file(argv[1], &image) != 0) { return 1; }
+	if(read_simp_file(argv[1], &image) != 0) return 1;
 	
 	/*checks to see if x, y, height and width are in valid range*/
-	if(valid_ranges(atoi(argv[3]), atoi(argv[4]), atoi(argv[5]), atoi(argv[6]), &image) != 0) { return 1; }
+	if(valid_ranges(atoi(argv[3]), atoi(argv[4]), atoi(argv[5]), atoi(argv[6]), &image) != 0) return 1;
 	
 	/*crop and store cropped image data*/
 	crop_simp(atoi(argv[5]), atoi(argv[6]), atoi(argv[3]), atoi(argv[4]), &image, &cropimage);
