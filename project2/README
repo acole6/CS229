@@ -3,7 +3,9 @@ acole6
 Com S 229
 Project 2
 
-CLASS STRUCTURE:
+##########################################################################################################
+# CLASS STRUCTURE
+##########################################################################################################
 
 I have two main classes, which are CellularAutomaton and World. The CellularAutomaton class stores everything in an automaton file, so it has the terrain, window, colors, chars, name, initial and rule (if required). It is responsible for storing and those value and updating the window and terrain if they happen to be passed in on the command line. It also determines the next state of a cell base on the type of cellular automaton. The values that do not need to be included in the automaton file are window and name. It is all right for the initial cells struct to have no cells for any of its identifiers. If no name is specified, the name is blank or empty. If no window is specified, the value is NULL. CellularAutomaton is also responsible for printing out the automaton in automaton file format.
 
@@ -58,8 +60,10 @@ Button functionality:
 -Restart - This will reset the simulation to generation 0 based on the initial cells of the automaton. If the simulation was started, this will cause it to stop but will not alter the delay value or grid size.
 -Play    - This will start the simulation based on the delay value. The slider can be adjusted and so can the value in the delay box and the simulation delay will be updated as the simulation continues. Once the simulation has been started, it stopped by pressing Restart, Quit or Step. The simulation simulates one generation at a time.
 -Step    - This will simulate one generation and then update the GuiWidget. If the simulation was started, this will stop it but will not alter the delay or grid size.
------------------------------------------------------------------------------------------------------------
-ASSUMPTIONS:
+
+##########################################################################################################
+# ASSUMPTIONS
+##########################################################################################################
 
 1. that wrap around meant that if the window was expanded past the terrain values, it would print a wrapped around version of the terrain
 2. that if the value for a cell given in the initial file went outside of the terrain, it would be wrapped around to fit in terrain and included in the initial cells instead of just being ignored.
@@ -83,12 +87,16 @@ ASSUMPTIONS:
 13. that both the B and the S must be present in the life-like rule.
 14. that B/S rule is invalid, but that duplicates are okay and will just be ignored i.e. B00001/S23333 will be treated like B01/S23
 15. that there would not be more than one of any of the identifiers in the automaton fie. If there are, though, mine will grab the most recent identifier value.
------------------------------------------------------------------------------------------------------------	 
-SOURCE CODE:
+
+##########################################################################################################
+# SOURCE CODE
+##########################################################################################################
 
 Programs:
 
-life.cc
+##########################################################################################################
+# life
+##########################################################################################################
 
 Usage: ./life
 
@@ -110,9 +118,10 @@ Supported switches:
 Window values whether given in input on or command line with take precedence over terrain values when world is displayed as ascii characters. By default output is in the form of -v flag and a name is not required for input.
 
 The terrain wraps around, so if window is beyond terrain ranges, the terrain will wrap around and be printed to fill the window ranges.
------------------------------------------------------------------------------------------------------------
 
-lifegui.cc
+##########################################################################################################
+# lifegui
+##########################################################################################################
 
 Usage: ./lifegui
 
@@ -300,6 +309,8 @@ control.h
 Control class description and function prototypes.
 -----------------------------------------------------------------------------------------------------------
 
-TODO:
+##########################################################################################################
+# TODO
+##########################################################################################################
 
 Get rid of any memory leaks, clean up code and make more functions. See if I can make the Qt classes nicer. Think about redoing some code to make use of references. And always, fix bugs and test more.
