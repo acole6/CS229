@@ -18,10 +18,7 @@ int main(int argc, char*argv[])
 	}
 	
 	/*reads simp file info and then converts the image to black and white*/
-	if(read_simp_file(argv[1], &image) != 0) 
-	{ 
-		return 1; 
-	}
+	if(read_simp_file(argv[1], &image) != 0) return 1; 
 	simp2bw(&image);
 	write_simp_file(argv[2], &image);
 
