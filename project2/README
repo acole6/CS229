@@ -58,12 +58,11 @@ Button functionality:
 -Restart - This will reset the simulation to generation 0 based on the initial cells of the automaton. If the simulation was started, this will cause it to stop but will not alter the delay value or grid size.
 -Play    - This will start the simulation based on the delay value. The slider can be adjusted and so can the value in the delay box and the simulation delay will be updated as the simulation continues. Once the simulation has been started, it stopped by pressing Restart, Quit or Step. The simulation simulates one generation at a time.
 -Step    - This will simulate one generation and then update the GuiWidget. If the simulation was started, this will stop it but will not alter the delay or grid size.
--------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 ASSUMPTIONS:
 
 1. that wrap around meant that if the window was expanded past the terrain values, it would print a wrapped around version of the terrain
-2. that if the value for a cell given in the initial file went outside of the terrain, it would be wrapped around to fit in terrain and included
-in the initial cells instead of just being ignored.
+2. that if the value for a cell given in the initial file went outside of the terrain, it would be wrapped around to fit in terrain and included in the initial cells instead of just being ignored.
 3. that the name being missing form the file is not critical and could just be blank
 4. that the xrange and yrange values could be interpreted like a graph as shown below:
             
@@ -84,7 +83,7 @@ in the initial cells instead of just being ignored.
 13. that both the B and the S must be present in the life-like rule.
 14. that B/S rule is invalid, but that duplicates are okay and will just be ignored i.e. B00001/S23333 will be treated like B01/S23
 15. that there would not be more than one of any of the identifiers in the automaton fie. If there are, though, mine will grab the most recent identifier value.
---------------------------------------------------------------------------------------------------------------------------------------------------	 
+----------------------------------------------------------------------------------------------------------------------	 
 SOURCE CODE:
 
 Programs:
@@ -108,11 +107,10 @@ Supported switches:
 -wx l..h sets the x range for the window in the format of low to high (low..high), which overrides the window values in input.
 -wy l..h sets the y range for the window in the format of low to high (low..high), which overrides the window values in input.
 
-Window values whether given in input on or command line with take precedence over terrain values when world is displayed as ascii characters.
-By default output is in the form of -v flag and a name is not required for input.
+Window values whether given in input on or command line with take precedence over terrain values when world is displayed as ascii characters. By default output is in the form of -v flag and a name is not required for input.
 
 The terrain wraps around, so if window is beyond terrain ranges, the terrain will wrap around and be printed to fill the window ranges.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 
 lifegui.cc
 
@@ -131,112 +129,99 @@ Supported switches:
 -ty l..h sets the y range for the terrain in the format of low to high (low..high), which overrides the terrain values in input.
 -wx l..h sets the x range for the window in the format of low to high (low..high), which overrides the window values in input.
 -wy l..h sets the y range for the window in the format of low to high (low..high), which overrides the window values in input.
--s will set the size in pixels of each square in the grid. If the size is less than 4, grid lines will not be displayed. Grid size is
-	10 by default
+-s will set the size in pixels of each square in the grid. If the size is less than 4, grid lines will not be displayed. Grid size is 10 by default
 -c will display a control dialog box to interact with the simulation.
 
 Button functionality:
--Quit    - This will exit the application and close both windows. It should exit without any errors (maybe qt memory issues though).
--Restart - This will reset the simulation to generation 0 based on the initial cells of the automaton. If the simulation was started, this will
-           cause it to stop but will not alter the delay value or grid size.
--Play    - This will start the simulation based on the delay value. The slider can be adjusted and so can the value in the delay box and the
-           simulation delay will be updated as the simulation continues. Once the simulation has been started, it stopped by pressing Restart, Quit
-		   or Step. The simulation simulates one generation at a time.
--Step    - This will simulate one generation and then update the GuiWidget. If the simulation was started, this will stop it but will not alter the
-           delay or grid size.
+-Quit    - This will exit the application and close both windows. It should exit without any errors (may be qt memory issues though).
+-Restart - This will reset the simulation to generation 0 based on the initial cells of the automaton. If the simulation was started, this will cause it to stop but will not alter the delay value or grid size.
+-Play    - This will start the simulation based on the delay value. The slider can be adjusted and so can the value in the delay box and the simulation delay will be updated as the simulation continues. Once the simulation has been started, it stopped by pressing Restart, Quit or Step. The simulation simulates one generation at a time.
+-Step    - This will simulate one generation and then update the GuiWidget. If the simulation was started, this will stop it but will not alter the delay or grid size.
 		   
 -Grid size box and slider adjusts the size of the grid squares in pixels
 -Delay box and slider adjusts the delay between generations in simulation
 
-Window values whether given in input on or command line with take precedence over terrain values when world is displayed.
-The terrain wraps around, so if window is beyond terrain ranges, the terrain will wrap around and be printed to fill the window ranges
---------------------------------------------------------------------------------------------------------------------------------------------------
+Window values whether given in input on or command line with take precedence over terrain values when world is displayed. The terrain wraps around, so if window is beyond terrain ranges, the terrain will wrap around and be printed to fill the window ranges
+----------------------------------------------------------------------------------------------------------------------
 
 Source:
 
 cell.cc
 
 Implements cell.h. This class keeps track of cell x and y positions, as well as the State of the cell. 
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 chars.cc
-Implements chars.h. This is an abstract class that stores automaton chars. It has a default character value. It is extended by BrianChars,
-LifeChars and ElemetnaryChars.
---------------------------------------------------------------------------------------------------------------------------------------------------
+Implements chars.h. This is an abstract class that stores automaton chars. It has a default character value. It is extended by BrianChars, LifeChars and ElemetnaryChars.
+----------------------------------------------------------------------------------------------------------------------
 brianchars.cc
 Implements brianchars.h. Brian's Brain chars, which are refactory (default), ready and firing.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 lifechars.cc
 Implements  lifechars.h. Life-like chars, which are dead (default) and alive.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 elementarychars.cc
 Implements elementarychars.h. Elementary chars, which are zero (default) and one.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 color.cc
 Implements color.h This class stores a color in an int vector where position 0 is red, 1 is green and 2 is blue
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 colors.cc
-Implements colors.h This is an abstract class that stores automaton colors. It has a default color value. It is extended by BrianColors,
-LifeColors and ElemetnaryColors.
---------------------------------------------------------------------------------------------------------------------------------------------------
+Implements colors.h This is an abstract class that stores automaton colors. It has a default color value. It is extended by BrianColors, LifeColors and ElemetnaryColors.
+----------------------------------------------------------------------------------------------------------------------
 briancolors.cc
 Implements briancolors.h. Brian's Brain colors, which are refactory (default), ready and firing.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 lifecolors.cc
 Implemetns lifecolors.h. Life-like colors, which are dead (default) and alive.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 elementarycolors.cc
 Implements elementarycolors.h. Elemetnary colors, which are zero (default) and one.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 initial.cc
 Implements initial.h. This is an abstract class that stores automaton initial cells. It is extended by BrianInitial, LifeInitial and ElemetnaryInitial.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 brianintial.cc
 Implements brianinitial.h. Brian's Brain initial cells, which could be made up of ready and/or firing cells.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 lifeinitial.cc
 Implements lifeinitial.h. Life-like initial cells, which can only be made up of alive cells.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 elementaryinitial.cc
 Implements elemetnaryinitial. Elementary initial cells, which can only be made up of one cells.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 cellularautomaton.cc
 Implements cellularautomaton.h. Abstract cellular automaton class.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 ruleautomaton.cc
-Implements ruleautoamton.h Abstract rule cellular automaton class. This extends CellularAutomaton. It is a type of cellular automaton that can have
-a rule that changes.
---------------------------------------------------------------------------------------------------------------------------------------------------
+Implements ruleautoamton.h Abstract rule cellular automaton class. This extends CellularAutomaton. It is a type of cellular automaton that can have a rule that changes.
+----------------------------------------------------------------------------------------------------------------------
 brian.cc
 Implements brian.h. Brian's Brain automaton. This extends CellularAutomaton.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 lifeclass.cc
 Implements lifeclass.h. Life-like automaton. This extends RuleAutomaton. Its rule is in the form of B01.../S01... where the values can be 0-8 (inclusive).
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 elementary.cc
 Implements elementary.h Elemetnary automaton. This extends RuleAutomaton. Its rule is a number between 0-255 (inclusive).
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 automatonparser.cc
-Implements automatonarser.h. This class parses though a automaton file that has been stripped of comments and whitespace and breaks it up into key-value pairs
-or identifier-value pairs
---------------------------------------------------------------------------------------------------------------------------------------------------
+Implements automatonarser.h. This class parses though a automaton file that has been stripped of comments and whitespace and breaks it up into key-value pairs or identifier-value pairs
+----------------------------------------------------------------------------------------------------------------------
 range.cc
 Implements range.h. This class stores values from wither a terrain struct or window struct. Its values can be updated based on command line values
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 settings.cc
-Implements settings.h This class keeps track of all the settings entered in on the command line and makes it easier for the programs to access them.
-Also strips the info in the life file or from standard input of comments and whitespace.
---------------------------------------------------------------------------------------------------------------------------------------------------
+Implements settings.h This class keeps track of all the settings entered in on the command line and makes it easier for the programs to access them. Also strips the info in the life file or from standard input of comments and whitespace.
+----------------------------------------------------------------------------------------------------------------------
 world.cc
-Implements world.h. This class creates a grid to represent a life to be simulated through multiple generations. It uses a cellular automaton to create the
-world and stores it into a vector of Cell vectors like a 2D array. It updates the automaton with non-default cells once the simulation is over
-and is used to print out the grid in ascii or the gui by either using the terrain or window ranges.
---------------------------------------------------------------------------------------------------------------------------------------------------
+Implements world.h. This class creates a grid to represent a life to be simulated through multiple generations. It uses a cellular automaton to create the world and stores it into a vector of Cell vectors like a 2D array. It updates the automaton with non-default cells once the simulation is over and is used to print out the grid in ascii or the gui by either using the terrain or window ranges.
+----------------------------------------------------------------------------------------------------------------------
 lifewidget.cc
 Implements lifewidget.h. This class extends QWidget and is used to paint the world by terrain or window ranges onto a window to be displayed.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 control.cc
 Implements control.h This is a control dialog box used to manipulate the GuiWidget and simulate through the generations of a cellular automaton.
---------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 
 Header Files:
 
