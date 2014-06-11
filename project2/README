@@ -11,16 +11,9 @@ CellularAutomaton is an abstract class and has two classes that extend it: Brian
 
 The World class has more work to do as it is responsible for converting the Terrain in the Life class into a 2D grid that is the world. I have the grid stored as a vector of cell vectors. The world can simulate life based on the rules of the automaton when it is given a number of generations to simulate. Since it has its own internal CellularAutomaton object, it can update that life object after the generations have been simulated.
 
-The AutomatonParser class is also important because it reads through an automaton file and gets the values of all the data to make the other
-classes' job that much easier. It parses through the file and stores the data in a key-value pair with the identifier as the key
-and the struct or whatever is after the = as the value. For example if I read through { Alive = 64; Dead = 124 }, then it would stored
-as key = Alive and value = 64 and key = Dead and value = 124, so if I called chars["Alive"], I would get 64 as a string value or an empty
-string if there was no value to be found. As long as the file is in proper format, this parser will ignore extra identifiers that may be in
-the file. It will ignore them and not say the file is invalid due to extra identifiers.
+The AutomatonParser class is also important because it reads through an automaton file and gets the values of all the data to make the other classes' job that much easier. It parses through the file and stores the data in a key-value pair with the identifier as the key and the struct or whatever is after the = as the value. For example if I read through { Alive = 64; Dead = 124 }, then it would stored as key = Alive and value = 64 and key = Dead and value = 124, so if I called chars["Alive"], I would get 64 as a string value or an empty string if there was no value to be found. As long as the file is in proper format, this parser will ignore extra identifiers that may be in the file. It will ignore them and not say the file is invalid due to extra identifiers.
 
-I also have a Settings class that is responsible for reading the command line and assigning values to flags if given. It also strips
-comments away and whitespace from the file or from cin to get it ready for AutomatonParser to parse it. The settings class will get the last
-switch of any certain type, but will get the first readable file. Below are some examples:
+I also have a Settings class that is responsible for reading the command line and assigning values to flags if given. It also strips comments away and whitespace from the file or from cin to get it ready for AutomatonParser to parse it. The settings class will get the last switch of any certain type, but will get the first readable file. Below are some examples:
 
 ./life file -g 2 -g 10
 This will set the generation to 10.
@@ -50,35 +43,21 @@ All invalid switches will be ignored.
 ./lifegui -a 2 -g 1 file -s 1 -control
 -a and -control will be ignored but the rest will be accepted.
 
-Beyond that, I broke up each major identifier in the automaton file into its own class. There is a Range class that takes care of both Window
-and Terrain, there is a Colors class, a Chars class and an Initial class. Range can update ranges if they are given on the command line
-and make sure ranges are valid. It also prints out ranges in life file format. Colors and Chars are also similar to Range. Initial 
-makes sure that the cells given in the life file fit the terrain and if they do not, then it will wrap them around into the terrain.
-Initial also converts world grid cells back into terrain cells after the world has finished its simulation.
+Beyond that, I broke up each major identifier in the automaton file into its own class. There is a Range class that takes care of both Window and Terrain, there is a Colors class, a Chars class and an Initial class. Range can update ranges if they are given on the command line and make sure ranges are valid. It also prints out ranges in life file format. Colors and Chars are also similar to Range. Initial makes sure that the cells given in the life file fit the terrain and if they do not, then it will wrap them around into the terrain. Initial also converts world grid cells back into terrain cells after the world has finished its simulation.
 
-Cell keeps track of individual cell info, like x pos, y pos and its state, which uses the State enum class that has DEFAULT, ALIVE, ONE, FIRING and READY
-Color stores a color in an int vector by RGB values.
+Cell keeps track of individual cell info, like x pos, y pos and its state, which uses the State enum class that has DEFAULT, ALIVE, ONE, FIRING and READY Color stores a color in an int vector by RGB values.
 
-GuiWidet is responsible for painting a given world in grid format to be displayed in a window. The GuiWidget now supports horizontal and vertical scroll
-bars that only show up if necessary.
+GuiWidet is responsible for painting a given world in grid format to be displayed in a window. The GuiWidget now supports horizontal and vertical scroll bars that only show up if necessary.
 
-Control is the control dialog box for the GuiWidget. It creates a GuiWidget based on the World. It has two sliders that allow delay and grid size to
-be adjusted. When the grid size is adjusted, the GuiWidger is updated and the widow is refreshed to show the changes. There is also a box to type in 
-a grid size. The range for the grid size has a minimum of 1 and a maximum of 100 and will not throw an error if the command line input exceeds the
-maximum (will thrown one if the command line input is less than 0). If it exceeds the maximum, it will be set to 100.
+Control is the control dialog box for the GuiWidget. It creates a GuiWidget based on the World. It has two sliders that allow delay and grid size to be adjusted. When the grid size is adjusted, the GuiWidger is updated and the widow is refreshed to show the changes. There is also a box to type in a grid size. The range for the grid size has a minimum of 1 and a maximum of 100 and will not throw an error if the command line input exceeds the maximum (will thrown one if the command line input is less than 0). If it exceeds the maximum, it will be set to 100.
 
-The delay sliders and box behave similarly, but for the delay on the timer. The range is from 0 to 10000 milliseconds, which is 0 to 10 seconds.
-The default is 4 seconds (4000 milliseconds). If the simulation has been started, the slider will adjust the time but will not stop the simulation.
+The delay sliders and box behave similarly, but for the delay on the timer. The range is from 0 to 10000 milliseconds, which is 0 to 10 seconds. The default is 4 seconds (4000 milliseconds). If the simulation has been started, the slider will adjust the time but will not stop the simulation.
 
 Button functionality:
--Quit    - This will exit the application and close both windows. It should exit without any errors (maybe qt memory issues though).
--Restart - This will reset the simulation to generation 0 based on the initial cells of the automaton. If the simulation was started, this will
-           cause it to stop but will not alter the delay value or grid size.
--Play    - This will start the simulation based on the delay value. The slider can be adjusted and so can the value in the delay box and the
-         - simulation delay will be updated as the simulation continues. Once the simulation has been started, it stopped by pressing Restart, Quit
-		   or Step. The simulation simulates one generation at a time.
--Step    - This will simulate one generation and then update the GuiWidget. If the simulation was started, this will stop it but will not alter the
-           delay or grid size.
+-Quit    - This will exit the application and close both windows. It should exit without any errors (may be qt memory issues though).
+-Restart - This will reset the simulation to generation 0 based on the initial cells of the automaton. If the simulation was started, this will cause it to stop but will not alter the delay value or grid size.
+-Play    - This will start the simulation based on the delay value. The slider can be adjusted and so can the value in the delay box and the simulation delay will be updated as the simulation continues. Once the simulation has been started, it stopped by pressing Restart, Quit or Step. The simulation simulates one generation at a time.
+-Step    - This will simulate one generation and then update the GuiWidget. If the simulation was started, this will stop it but will not alter the delay or grid size.
 -------------------------------------------------------------------------------------------------------------------------
 ASSUMPTIONS:
 
