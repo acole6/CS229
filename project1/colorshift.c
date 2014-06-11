@@ -18,8 +18,8 @@ int main(int argc, char*argv[])
 	}
 	
 	/*reads simp file info and then shifts the colors with the given pattern*/
-	if(read_simp_file(argv[1], &image) != 0) { return 1; }
-	if(simp_colorshift(argv[3], &image) != 0) { return 1; }
+	if(read_simp_file(argv[1], &image) != 0) return 1;
+	if(simp_colorshift(argv[3], &image) != 0) return 1;
 	write_simp_file(argv[2], &image);
 	
 	free_pixels(&image);
