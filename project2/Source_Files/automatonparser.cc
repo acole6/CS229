@@ -142,7 +142,7 @@ int AutomatonParser::countChar(string str, char ch)
 	int count = 0;
 	for(unsigned int i = 0; i < str.length(); i++)
 	{
-		if(str[i] == ch) { count++; }
+		if(str[i] == ch) count++;
 	}
 	return count;
 }
@@ -174,10 +174,7 @@ bool AutomatonParser::checkFormat(int *arr, int length, string str, char start, 
 		}
 		else if(str[i] == end) //if terminating char appears before a starting char, invalid format
 		{
-			if(arrPos == -1)
-			{
-				return false;
-			}
+			if(arrPos == -1) return false;
 
 			int pos = findMatchingCharPos(arr, arrPos + 1); //find the terminating char position
 			if(pos != -1) //if found set starting position to -1
@@ -222,7 +219,7 @@ int AutomatonParser::findMatchingCharPos(string str, char start, char end)
 		else if(str[i] == end && found)//if the terminating char and the starting char has been found, then decrease the count
 		{
 			count--;
-			if(count == 0) { return i; } //if the count has been reduced to 0, then this is the matching position, so return it 
+			if(count == 0) return i; //if the count has been reduced to 0, then this is the matching position, so return it 
 		}
 	}
 	return -1; //matching position was not found
@@ -241,7 +238,7 @@ int AutomatonParser::findMatchingCharPos(int *arr, int length)
 {
 	for(int i = length - 1; i >= 0; i--) //looks through array in reverse until it finds a positive value, then returns that position
 	{
-		if(arr[i] >= 0) { return i; }
+		if(arr[i] >= 0) return i;
 	}
 	return -1; //no positive values found in the array
 }
@@ -272,7 +269,7 @@ string AutomatonParser::removeQuotedStr(string str)
 			}
 		}
 
-		if(leftQuote != -1 && rightQuote == -1) { return ""; } //returns empty string if left quote but no right quote. Invalid format
+		if(leftQuote != -1 && rightQuote == -1) return ""; //returns empty string if left quote but no right quote. Invalid format
 
 		string left = str.substr(0, leftQuote);
 		string right = str.substr(rightQuote + 1, str.length());
