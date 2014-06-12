@@ -13,7 +13,7 @@ const int InvalidInitialValueException = 9;
  */
 class Initial
 {
-protected:
+private:
 	/**
 	 * initial cells of the automaton
 	 */
@@ -58,7 +58,7 @@ public:
 	 * @return 
 	 *			A cell vector of initial cells.
 	 */
-	vector<Cell> getCells();
+	vector<Cell> getCells() const;
 
 	/**
 	 * Adds a cell to the vector of cells (does not check for duplicates).

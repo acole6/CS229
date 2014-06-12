@@ -70,6 +70,11 @@ Color* Colors::getDefaultColor()
 	return &defaultCl;
 }
 
+void Colors::setDefaultColor(Color defaultCl)
+{
+	this->defaultCl = defaultCl;
+}
+
 /**
  * Coverts a color string in the from of (red, green, blue) to an int vector.
  * @param colorStr 

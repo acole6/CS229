@@ -73,33 +73,34 @@ BrianInitial& BrianInitial::operator=(const BrianInitial &brianInitial)
  */
 string BrianInitial::toString()
 {
+	vector<Cell> brinCells = getCells();
 	ostringstream ret;
 	ret  << "Initial = {\n";
 
 	string ready;
 	string firing;
-	for(unsigned int i = 0; i < cells.size(); i++)
+	for(unsigned int i = 0; i < brinCells.size(); i++)
 	{
-		if(cells[i].getState() == State::READY)
+		if(brinCells[i].getState() == State::READY)
 		{
 			if(ready.empty())
 			{
-				ready += cells[i].toString();
+				ready += brinCells[i].toString();
 			}
 			else
 			{
-				ready += ("," + cells[i].toString()); 
+				ready += ("," + brinCells[i].toString()); 
 			}
 		}
 		else
 		{
 			if(firing.empty())
 			{
-				firing += cells[i].toString();
+				firing += brinCells[i].toString();
 			}
 			else
 			{
-				firing += ("," + cells[i].toString()); 
+				firing += ("," + brinCells[i].toString()); 
 			}
 		}
 	}

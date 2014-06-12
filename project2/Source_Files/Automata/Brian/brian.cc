@@ -28,9 +28,9 @@ Brian::Brian(string brianStruct)
 	: CellularAutomaton(brianStruct)
 {
 	map<string, string> brian = AutomatonParser::parse(brianStruct);
-	chars = new BrianChars(AutomatonParser::getValue(brian, "Chars", true));
-	colors = new BrianColors(AutomatonParser::getValue(brian, "Colors", true));
-	initial = new BrianInitial(AutomatonParser::getValue(brian, "Initial", true), terrain);
+	setChars(new BrianChars(AutomatonParser::getValue(brian, "Chars", true)));
+	setColors(new BrianColors(AutomatonParser::getValue(brian, "Colors", true)));
+	setInitial(new BrianInitial(AutomatonParser::getValue(brian, "Initial", true), getTerrain()));
 }
 
 /**
@@ -41,9 +41,9 @@ Brian::Brian(string brianStruct)
 Brian::Brian(const Brian &brian)
 	: CellularAutomaton(brian)
 {
-	chars = brian.chars != NULL ? new BrianChars(*((BrianChars*) brian.chars)) : NULL;
-	colors = brian.colors != NULL ? new BrianColors(*((BrianColors*) brian.colors)) : NULL;
-	initial = brian.initial != NULL ? new BrianInitial(*((BrianInitial*) brian.initial)) : NULL;
+	setChars(brian.getChars() != NULL ? new BrianChars(*((BrianChars*) brian.getChars())) : NULL);
+	setColors(brian.getColors() != NULL ? new BrianColors(*((BrianColors*) brian.getColors())) : NULL);
+	setInitial(brian.getInitial() != NULL ? new BrianInitial(*((BrianInitial*) brian.getInitial())) : NULL);
 }
 
 /**
@@ -62,9 +62,9 @@ Brian& Brian::operator=(const Brian &brian)
 {
 	if(this == &brian) return *this;
 	CellularAutomaton::operator=(brian);
-	chars = brian.chars != NULL ? new BrianChars(*((BrianChars*) brian.chars)) : NULL;
-	colors = brian.colors != NULL ? new BrianColors(*((BrianColors*) brian.colors)) : NULL;
-	initial = brian.initial != NULL ? new BrianInitial(*((BrianInitial*) brian.initial)) : NULL;
+	setChars(brian.getChars() != NULL ? new BrianChars(*((BrianChars*) brian.getChars())) : NULL);
+	setColors(brian.getColors() != NULL ? new BrianColors(*((BrianColors*) brian.getColors())) : NULL);
+	setInitial(brian.getInitial() != NULL ? new BrianInitial(*((BrianInitial*) brian.getInitial())) : NULL);
 	return *this;
 }
 
@@ -118,7 +118,7 @@ State Brian::nextCellState(vector<vector<Cell>> &world, Cell &cell)
  */
 char Brian::getChar(Cell &cell)
 {
-	BrianChars *brianChars = (BrianChars*) chars;
+	BrianChars *brianChars = (BrianChars*) getChars();
 	State state = cell.getState();
 	if(state == State::READY)
 	{
@@ -141,7 +141,7 @@ char Brian::getChar(Cell &cell)
  */
 Color Brian::getColor(Cell &cell)
 {
-	BrianColors *brianColors = (BrianColors*) colors;
+	BrianColors *brianColors = (BrianColors*) getColors();
 	State state = cell.getState();
 	if(state == State::READY)
 	{
@@ -163,18 +163,18 @@ string Brian::toString()
 {
 	ostringstream ret;
 	ret << "Brian =\n{\n\t";
-	if(name.length() > 0)
+	if(getName().length() > 0)
 	{
-		ret << "Name = \"" << name << "\";\n\n\t";
+		ret << "Name = \"" << getName() << "\";\n\n\t";
 	}
 
-	ret << terrain->toString("Terrain") << "\n\n\t"; 
+	ret << getTerrain()->toString("Terrain") << "\n\n\t"; 
 
-	if(window != NULL)
+	if(getWindow() != NULL)
 	{
-		ret << window->toString("Window") << "\n\n\t";
+		ret << getWindow()->toString("Window") << "\n\n\t";
 	}
 			
-	ret << chars->toString() << "\n\n\t" << colors->toString() << "\n\n\t" << initial->toString() << "\n};";
+	ret << getChars()->toString() << "\n\n\t" << getColors()->toString() << "\n\n\t" << getInitial()->toString() << "\n};";
 	return ret.str();
 }

@@ -73,17 +73,18 @@ LifeInitial& LifeInitial::operator=(const LifeInitial &lifeInitial)
  */
 string LifeInitial::toString()
 {
+	vector<Cell> lifeCells = getCells();
 	ostringstream ret;
 	ret  << "Initial = {\n\t\tAlive = ";
-	for(unsigned int i = 0; i < cells.size(); i++)
+	for(unsigned int i = 0; i < lifeCells.size(); i++)
 	{
-		if(i != cells.size() - 1)
+		if(i != lifeCells.size() - 1)
 		{
-			ret << cells[i].toString() << ", ";
+			ret << lifeCells[i].toString() << ", ";
 		}
 		else
 		{
-			ret << cells[i].toString();
+			ret << lifeCells[i].toString();
 		}
 	}
 	ret << ";\n\t};";

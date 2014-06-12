@@ -34,7 +34,7 @@ BrianChars::BrianChars(string brianCharStruct)
 	map<string, string> chars = AutomatonParser::parse(brianCharStruct);
 	readyCh = atoi(AutomatonParser::getValue(chars, "Ready", true).c_str());
 	firingCh = atoi(AutomatonParser::getValue(chars, "Firing", true).c_str());
-	defaultCh = atoi(AutomatonParser::getValue(chars, "Refactory", true).c_str());
+	setDefaultChar(atoi(AutomatonParser::getValue(chars, "Refactory", true).c_str()));
 }
 
 /**
@@ -134,6 +134,6 @@ void BrianChars::setFiringChar(int firingCh)
 string BrianChars::toString()
 {
 	ostringstream ret;
-	ret << "Chars = {\n\t\tReady = " << readyCh << ";\n\t\tFiring = " << firingCh << ";\n\t\tRefactory = " << defaultCh << ";\n\t};";
+	ret << "Chars = {\n\t\tReady = " << readyCh << ";\n\t\tFiring = " << firingCh << ";\n\t\tRefactory = " << getDefaultChar() << ";\n\t};";
 	return ret.str();
 }

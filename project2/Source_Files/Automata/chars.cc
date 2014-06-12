@@ -63,7 +63,7 @@ Chars& Chars::operator=(const Chars &chars)
  * @return 
  *			The default character value as an int.
  */
-int Chars::getDefaultChar()
+int Chars::getDefaultChar() const
 {
 	return defaultCh;
 }

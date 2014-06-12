@@ -9,7 +9,7 @@
  */
 class Life : public RuleAutomaton
 {	
-protected:
+private:
 	/**
 	 * number of neighbors in alive state needed to be born
 	 */

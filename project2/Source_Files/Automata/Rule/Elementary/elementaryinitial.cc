@@ -72,17 +72,18 @@ ElementaryInitial& ElementaryInitial::operator=(const ElementaryInitial &element
  */
 string ElementaryInitial::toString()
 {
+	vector<Cell> elementaryCells = getCells();
 	ostringstream ret;
 	ret  << "Initial = {\n\t\tOne = ";
-	for(unsigned int i = 0; i < cells.size(); i++)
+	for(unsigned int i = 0; i < elementaryCells.size(); i++)
 	{
-		if(i != cells.size() - 1)
+		if(i != elementaryCells.size() - 1)
 		{
-			ret << cells[i].toString() << ", ";
+			ret << elementaryCells[i].toString() << ", ";
 		}
 		else
 		{
-			ret << cells[i].toString();
+			ret << elementaryCells[i].toString();
 		}
 	}
 	ret << ";\n\t};";

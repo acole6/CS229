@@ -31,9 +31,9 @@ Life::Life(string lifeStruct)
 	map<string, string> life = AutomatonParser::parse(lifeStruct);
 	setBorn();
 	setStayAlive();
-	chars = new LifeChars(AutomatonParser::getValue(life, "Chars", true));
-	colors = new LifeColors(AutomatonParser::getValue(life, "Colors", true));
-	initial = new LifeInitial(AutomatonParser::getValue(life, "Initial", true), terrain);
+	setChars(new LifeChars(AutomatonParser::getValue(life, "Chars", true)));
+	setColors(new LifeColors(AutomatonParser::getValue(life, "Colors", true)));
+	setInitial(new LifeInitial(AutomatonParser::getValue(life, "Initial", true), getTerrain()));
 }
 
 /**
@@ -46,9 +46,9 @@ Life::Life(const Life &life)
 {
 	born = life.born;
 	stayAlive = life.stayAlive;
-	chars = life.chars != NULL ? new LifeChars(*((LifeChars*) life.chars)) : NULL;
-	colors = life.colors != NULL ? new LifeColors(*((LifeColors*) life.colors)) : NULL;
-	initial = life.initial != NULL ? new LifeInitial(*((LifeInitial*) life.initial)) : NULL;
+	setChars(life.getChars() != NULL ? new LifeChars(*((LifeChars*) life.getChars())) : NULL);
+	setColors(life.getColors() != NULL ? new LifeColors(*((LifeColors*) life.getColors())) : NULL);
+	setInitial(life.getInitial() != NULL ? new LifeInitial(*((LifeInitial*) life.getInitial())) : NULL);
 }
 
 /**
@@ -69,9 +69,9 @@ Life& Life::operator=(const Life &life)
 	RuleAutomaton::operator=(life);
 	born = life.born;
 	stayAlive = life.stayAlive;
-	chars = life.chars != NULL ? new LifeChars(*((LifeChars*) life.chars)) : NULL;
-	colors = life.colors != NULL ? new LifeColors(*((LifeColors*) life.colors)) : NULL;
-	initial = life.initial != NULL ? new LifeInitial(*((LifeInitial*) life.initial)) : NULL;
+	setChars(life.getChars() != NULL ? new LifeChars(*((LifeChars*) life.getChars())) : NULL);
+	setColors(life.getColors() != NULL ? new LifeColors(*((LifeColors*) life.getColors())) : NULL);
+	setInitial(life.getInitial() != NULL ? new LifeInitial(*((LifeInitial*) life.getInitial())) : NULL);
 	return *this;
 }
 
@@ -120,7 +120,7 @@ State Life::nextCellState(vector<vector<Cell>> &world, Cell &cell)
  */
 char Life::getChar(Cell &cell)
 {
-	LifeChars *lifeChars = (LifeChars*) chars;
+	LifeChars *lifeChars = (LifeChars*) getChars();
 	if(cell.getState() == State::ALIVE)
 	{
 		return (char) lifeChars->getAliveChar();
@@ -137,7 +137,7 @@ char Life::getChar(Cell &cell)
  */
 Color Life::getColor(Cell &cell)
 {
-	LifeColors* lifecolors = (LifeColors*) colors;
+	LifeColors* lifecolors = (LifeColors*) getColors();
 	if(cell.getState() == State::ALIVE)
 	{
 		return *(lifecolors->getAliveColor());
@@ -154,24 +154,24 @@ string Life::toString()
 {
 	ostringstream ret;
 	ret << "Life =\n{\n\t";
-	if(name.length() > 0)
+	if(getName().length() > 0)
 	{
-		ret << "Name = \"" << name << "\";\n\n\t";
+		ret << "Name = \"" << getName() << "\";\n\n\t";
 	}
 
-	if(rule.length() > 0)
+	if(getRule().length() > 0)
 	{
-		ret << "Rule = " << rule << ";\n\n\t";
+		ret << "Rule = " << getRule() << ";\n\n\t";
 	}
 
-	ret << terrain->toString("Terrain") << "\n\n\t"; 
+	ret << getTerrain()->toString("Terrain") << "\n\n\t"; 
 
-	if(window != NULL)
+	if(getWindow() != NULL)
 	{
-		ret << window->toString("Window") << "\n\n\t";
+		ret << getWindow()->toString("Window") << "\n\n\t";
 	}
 			
-	ret << chars->toString() << "\n\n\t" << colors->toString() << "\n\n\t" << initial->toString() << "\n};";
+	ret << getChars()->toString() << "\n\n\t" << getColors()->toString() << "\n\n\t" << getInitial()->toString() << "\n};";
 	return ret.str();
 }
 
@@ -182,23 +182,24 @@ string Life::toString()
  */
 void Life::setBorn()
 {
-	if(rule[0] != 'B')
+	string ruleStr = getRule();
+	if(ruleStr[0] != 'B')
 	{
-		cerr << "Invalid rule: " << rule << endl;
+		cerr << "Invalid rule: " << ruleStr << endl;
 		throw InvalidRuleException;
 	}
 	
-	int split = rule.find("/");
+	int split = ruleStr.find("/");
 	if(split == string::npos)
 	{
-		cerr << "Invalid rule: " << rule << endl;
+		cerr << "Invalid rule: " << ruleStr << endl;
 		throw InvalidRuleException;
 	}
 
-	fillVectorFromDigitStr(born, rule.substr(0, split));
+	fillVectorFromDigitStr(born, ruleStr.substr(0, split));
 	if(born.size() == 0)
 	{
-		cerr << "Invalid rule: " << rule << endl;
+		cerr << "Invalid rule: " << ruleStr << endl;
 		throw InvalidRuleException;
 	}
 }
@@ -210,23 +211,24 @@ void Life::setBorn()
  */
 void Life::setStayAlive()
 {
-	int split = rule.find("/");
+	string ruleStr = getRule();
+	int split = ruleStr.find("/");
 	if(split == string::npos)
 	{
-		cerr << "Invalid rule: " << rule << endl;
+		cerr << "Invalid rule: " << ruleStr << endl;
 		throw InvalidRuleException;
 	}
 
-	if(split + 1 >= rule.length() || rule[split + 1] != 'S')
+	if(split + 1 >= ruleStr.length() || ruleStr[split + 1] != 'S')
 	{ 
-		cerr << "Invalid rule: " << rule << endl;
+		cerr << "Invalid rule: " << ruleStr << endl;
 		throw InvalidRuleException;
 	}
 	
-	fillVectorFromDigitStr(stayAlive, rule.substr(split + 1, rule.length()));
+	fillVectorFromDigitStr(stayAlive, ruleStr.substr(split + 1, ruleStr.length()));
 	if(stayAlive.size() == 0)
 	{
-		cerr << "Invalid rule: " << rule << endl;
+		cerr << "Invalid rule: " << ruleStr << endl;
 		throw InvalidRuleException;
 	}
 }
@@ -247,7 +249,7 @@ void Life::fillVectorFromDigitStr(vector<int> &digits, string digitStr)
 		int num = digitStr[i] - '0';
 		if(num < 0 || num > 8)
 		{
-			cerr << "Invalid rule: " << rule << endl;
+			cerr << "Invalid rule: " << getRule() << endl;
 			throw InvalidRuleException;
 		}
 		digits.push_back(num);

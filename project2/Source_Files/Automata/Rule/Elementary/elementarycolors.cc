@@ -88,7 +88,7 @@ Color* ElementaryColors::getOneColor()
 string ElementaryColors::toString()
 {
 	ostringstream ret;
-	ret << "Colors = {\n\t\tOne = " << oneCl.toString() << ";\n\t\tZero = " << defaultCl.toString() << ";\n\t};";
+	ret << "Colors = {\n\t\tOne = " << oneCl.toString() << ";\n\t\tZero = " << getDefaultColor()->toString() << ";\n\t};";
 	return ret.str();
 }
 
@@ -102,5 +102,5 @@ string ElementaryColors::toString()
 void ElementaryColors::init(Color oneCl, Color defaultCl)
 {
 	this->oneCl = oneCl;
-	this->defaultCl = defaultCl;
+	setDefaultColor(defaultCl);
 }

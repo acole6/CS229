@@ -104,7 +104,7 @@ Color* BrianColors::getFiringColor()
 string BrianColors::toString()
 {
 	ostringstream ret;
-	ret << "Colors = {\n\t\tReady = " << readyCl.toString() << ";\n\t\tFiring = " << firingCl.toString() << ";\n\t\tRefactory = " << defaultCl.toString() << ";\n\t};";
+	ret << "Colors = {\n\t\tReady = " << readyCl.toString() << ";\n\t\tFiring = " << firingCl.toString() << ";\n\t\tRefactory = " << getDefaultColor()->toString() << ";\n\t};";
 	return ret.str();
 }
 
@@ -121,5 +121,5 @@ void BrianColors::init(Color readyCl, Color firingCl, Color defaultCl)
 {
 	this->readyCl = readyCl;
 	this->firingCl = firingCl;
-	this->defaultCl = defaultCl;
+	setDefaultColor(defaultCl);
 }

@@ -55,7 +55,7 @@ Initial& Initial::operator=(const Initial &initial)
  * @return 
  *			A cell vector of initial cells.
  */
-vector<Cell> Initial::getCells()
+vector<Cell> Initial::getCells() const
 {
 	return cells;
 }

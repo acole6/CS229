@@ -13,7 +13,7 @@
  */
 class CellularAutomaton
 {
-protected:
+private:
 	/**
 	 * The terrain of the automaton
 	 */
@@ -85,42 +85,48 @@ public:
 	 * @return 
 	 *			A pointer to the terrain.
 	 */
-	Range* getTerrain();
+	Range* getTerrain() const; 
 
 	/**
 	 * Gets the window.
 	 * @return 
 	 *			A pointer to the window.
 	 */
-	Range* getWindow(); 
+	Range* getWindow() const; 
 
 	/**
 	 * Gets the chars.
 	 * @return 
 	 *			A pointer to the chars.
 	 */
-	Chars* getChars();
+	Chars* getChars() const;
 
 	/**
 	 * Gets the colors.
 	 * @return 
 	 *			A pointer to the colors.
 	 */
-	Colors* getColors();
+	Colors* getColors() const;
 
 	/**
 	 * Gets the initial.
 	 * @return 
 	 *			A pointer to the initial.
 	 */
-	Initial* getInitial();
+	Initial* getInitial() const;
 
 	/**
 	 * Gets the name.
 	 * @return 
 	 *			The name of the automaton.
 	 */
-	string getName();
+	string getName() const;
+
+	void setChars(Chars *chars);
+
+	void setColors(Colors *colors);
+
+	void setInitial(Initial *initial);
 
 	/**
 	 * Updates the window with the given ranges. If both are empty

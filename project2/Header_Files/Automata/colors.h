@@ -9,7 +9,7 @@
  */
 class Colors
 {
-protected:
+private:
 	/**
 	 * RGB default color
 	 */
@@ -63,6 +63,8 @@ public:
 	 *				A pointer to default color.
 	 */
 	Color* getDefaultColor();
+
+	void setDefaultColor(Color defaultCl);
 
 	/**
 	 * Not implemented.

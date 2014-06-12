@@ -187,7 +187,7 @@ void Color::checkChannelRange(int value, string channel)
 {
 	if(value < 0 || value > 255)
 	{
-		cerr << "Invalid color channel value, " << value << ", for " << channel << " channel.\n";
+		cerr << "Invalid color channel value, " << value << ", for " << channel << "channel.\n";
 		throw InvalidColorException;
 	}
 }

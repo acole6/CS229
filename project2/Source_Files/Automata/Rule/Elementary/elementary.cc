@@ -33,12 +33,12 @@ Elementary::Elementary(string elementaryStruct)
 	map<string, string> elementary = AutomatonParser::parse(elementaryStruct);
 	if(!validRule()) 
 	{
-		cerr << "Invalid rule: " << rule << endl;
+		cerr << "Invalid rule: " << getRule() << endl;
 		throw InvalidRuleException;
 	}
-	chars = new ElementaryChars(AutomatonParser::getValue(elementary, "Chars", true));
-	colors = new ElementaryColors(AutomatonParser::getValue(elementary, "Colors", true));
-	initial = new ElementaryInitial(AutomatonParser::getValue(elementary, "Initial",true), terrain);
+	setChars(new ElementaryChars(AutomatonParser::getValue(elementary, "Chars", true)));
+	setColors(new ElementaryColors(AutomatonParser::getValue(elementary, "Colors", true)));
+	setInitial(new ElementaryInitial(AutomatonParser::getValue(elementary, "Initial",true), getTerrain()));
 }
 
 /**
@@ -49,9 +49,9 @@ Elementary::Elementary(string elementaryStruct)
 Elementary::Elementary(const Elementary &elementary)
 	: RuleAutomaton(elementary)
 {
-	chars = elementary.chars != NULL ? new ElementaryChars(*((ElementaryChars*) elementary.chars)) : NULL;
-	colors = elementary.colors != NULL ? new ElementaryColors(*((ElementaryColors*) elementary.colors)) : NULL;
-	initial = elementary.initial != NULL ? new ElementaryInitial(*((ElementaryInitial*) elementary.initial)) : NULL;
+	setChars(elementary.getChars() != NULL ? new ElementaryChars(*((ElementaryChars*) elementary.getChars())) : NULL);
+	setColors(elementary.getColors() != NULL ? new ElementaryColors(*((ElementaryColors*) elementary.getColors())) : NULL);
+	setInitial(elementary.getInitial() != NULL ? new ElementaryInitial(*((ElementaryInitial*) elementary.getInitial())) : NULL);
 }
 
 /**
@@ -70,9 +70,9 @@ Elementary& Elementary::operator=(const Elementary &elementary)
 {
 	if(this == &elementary) return *this;
 	RuleAutomaton::operator=(elementary);
-	chars = elementary.chars != NULL ? new ElementaryChars(*((ElementaryChars*) elementary.chars)) : NULL;
-	colors = elementary.colors != NULL ? new ElementaryColors(*((ElementaryColors*) elementary.colors)) : NULL;
-	initial = elementary.initial != NULL ? new ElementaryInitial(*((ElementaryInitial*) elementary.initial)) : NULL;
+	setChars(elementary.getChars() != NULL ? new ElementaryChars(*((ElementaryChars*) elementary.getChars())) : NULL);
+	setColors(elementary.getColors() != NULL ? new ElementaryColors(*((ElementaryColors*) elementary.getColors())) : NULL);
+	setInitial(elementary.getInitial() != NULL ? new ElementaryInitial(*((ElementaryInitial*) elementary.getInitial())) : NULL);
 	return *this;
 }
 
@@ -91,7 +91,7 @@ State Elementary::nextCellState(vector<vector<Cell>> &world, Cell &cell)
 	if(cell.getState() == State::ONE) return State::ONE;
 
 	string pattern = rulePattern(world, cell);
-	unsigned char stateRule = atoi(rule.c_str());
+	unsigned char stateRule = atoi(getRule().c_str());
 	if((pattern.compare("111") == 0 && getBit(stateRule, 7) == 1) || (pattern.compare("110") == 0 && getBit(stateRule, 6) == 1) || (pattern.compare("101") == 0 && getBit(stateRule, 5) == 1)
 		|| (pattern.compare("100") == 0 && getBit(stateRule, 4) == 1) || (pattern.compare("011") == 0 && getBit(stateRule, 3) == 1) || (pattern.compare("010") == 0 && getBit(stateRule, 2) == 1)
 		|| (pattern.compare("001") == 0 && getBit(stateRule, 1) == 1) || (pattern.compare("000") == 0 && getBit(stateRule, 0) == 1))
@@ -110,7 +110,7 @@ State Elementary::nextCellState(vector<vector<Cell>> &world, Cell &cell)
  */
 char Elementary::getChar(Cell &cell)
 {
-	ElementaryChars *elementaryChars = (ElementaryChars*) chars;
+	ElementaryChars *elementaryChars = (ElementaryChars*) getChars();
 	if(cell.getState() == State::ONE)
 	{
 		return (char) elementaryChars->getOneChar();
@@ -127,7 +127,7 @@ char Elementary::getChar(Cell &cell)
  */
 Color Elementary::getColor(Cell &cell)
 {
-	ElementaryColors *elementaryColors = (ElementaryColors*) colors;
+	ElementaryColors *elementaryColors = (ElementaryColors*) getColors();
 	if(cell.getState() == State::ONE)
 	{
 		return *(elementaryColors->getOneColor());
@@ -144,24 +144,24 @@ string Elementary::toString()
 {
 	ostringstream ret;
 	ret << "Elementary =\n{\n\t";
-	if(name.length() > 0)
+	if(getName().length() > 0)
 	{
-		ret << "Name = \"" << name << "\";\n\n\t";
+		ret << "Name = \"" << getName() << "\";\n\n\t";
 	}
 
-	if(!rule.empty())
+	if(!getRule().empty())
 	{
-		ret << "Rule = " << rule << ";\n\n\t";
+		ret << "Rule = " << getRule() << ";\n\n\t";
 	}
 
-	ret << terrain->toString("Terrain") << "\n\n\t"; 
+	ret << getTerrain()->toString("Terrain") << "\n\n\t"; 
 
-	if(window != NULL)
+	if(getWindow() != NULL)
 	{
-		ret << window->toString("Window") << "\n\n\t";
+		ret << getWindow()->toString("Window") << "\n\n\t";
 	}
 			
-	ret << chars->toString() << "\n\n\t" << colors->toString() << "\n\n\t" << initial->toString() << "\n};";
+	ret << getChars()->toString() << "\n\n\t" << getColors()->toString() << "\n\n\t" << getInitial()->toString() << "\n};";
 	return ret.str();
 }
 
@@ -214,6 +214,6 @@ string Elementary::rulePattern(vector<vector<Cell>> &world, Cell &cell)
  */
 bool Elementary::validRule()
 {
-	int num = atoi(rule.c_str());
+	int num = atoi(getRule().c_str());
 	return num >= 0 && num <= 255;
 }

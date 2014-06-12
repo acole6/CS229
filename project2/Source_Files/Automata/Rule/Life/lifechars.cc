@@ -29,7 +29,7 @@ LifeChars::LifeChars(string lifeCharStruct)
 {
 	map<string, string> chars = AutomatonParser::parse(lifeCharStruct);
 	aliveCh = atoi(AutomatonParser::getValue(chars, "Alive", true).c_str());
-	defaultCh = atoi(AutomatonParser::getValue(chars, "Dead", true).c_str());
+	setDefaultChar(atoi(AutomatonParser::getValue(chars, "Dead", true).c_str()));
 }
 
 /**
@@ -104,6 +104,6 @@ void LifeChars::setAliveChar(int aliveCh)
 string LifeChars::toString()
 {
 	ostringstream ret;
-	ret << "Chars = {\n\t\tAlive = " << aliveCh << ";\n\t\tDead = " << defaultCh << ";\n\t};";
+	ret << "Chars = {\n\t\tAlive = " << aliveCh << ";\n\t\tDead = " << getDefaultChar() << ";\n\t};";
 	return ret.str();
 }

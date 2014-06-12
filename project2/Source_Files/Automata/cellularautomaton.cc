@@ -77,7 +77,7 @@ CellularAutomaton& CellularAutomaton::operator=(const CellularAutomaton &automat
  * @return 
  *			A pointer to the terrain.
  */
-Range* CellularAutomaton::getTerrain()
+Range* CellularAutomaton::getTerrain() const
 {
 	return terrain;
 }
@@ -87,7 +87,7 @@ Range* CellularAutomaton::getTerrain()
  * @return 
  *			A pointer to the window.
  */
-Range* CellularAutomaton::getWindow() 
+Range* CellularAutomaton::getWindow() const
 {
 	return window;
 }
@@ -97,7 +97,7 @@ Range* CellularAutomaton::getWindow()
  * @return 
  *			A pointer to the chars.
  */
-Chars* CellularAutomaton::getChars()
+Chars* CellularAutomaton::getChars() const
 {
 	return chars;
 }
@@ -107,7 +107,7 @@ Chars* CellularAutomaton::getChars()
  * @return 
  *			A pointer to the colors.
  */
-Colors* CellularAutomaton::getColors()
+Colors* CellularAutomaton::getColors() const
 {
 	return colors;
 }
@@ -117,7 +117,7 @@ Colors* CellularAutomaton::getColors()
  * @return 
  *			A pointer to the initial.
  */
-Initial* CellularAutomaton::getInitial()
+Initial* CellularAutomaton::getInitial() const
 {
 	return initial;
 }
@@ -127,9 +127,24 @@ Initial* CellularAutomaton::getInitial()
  * @return 
  *			The name of the automaton.
  */
-string CellularAutomaton::getName()
+string CellularAutomaton::getName() const
 {
 	return name;
+}
+
+void CellularAutomaton::setChars(Chars *chars)
+{
+	this->chars = chars;
+}
+
+void CellularAutomaton::setColors(Colors *colors)
+{
+	this->colors = colors;
+}
+
+void CellularAutomaton::setInitial(Initial *initial)
+{
+	this->initial = initial;
 }
 
 /**

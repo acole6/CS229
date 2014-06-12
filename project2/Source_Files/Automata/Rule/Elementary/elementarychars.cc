@@ -30,7 +30,7 @@ ElementaryChars::ElementaryChars(string elementaryCharStruct)
 {
 	map<string, string> chars = AutomatonParser::parse(elementaryCharStruct);
 	oneCh = atoi(AutomatonParser::getValue(chars, "One", true).c_str());
-	defaultCh = atoi(AutomatonParser::getValue(chars, "Zero", true).c_str());
+	setDefaultChar(atoi(AutomatonParser::getValue(chars, "Zero", true).c_str()));
 }
 
 /**
@@ -105,6 +105,6 @@ void ElementaryChars::setOneChar(int oneCh)
 string ElementaryChars::toString()
 {
 	ostringstream ret;
-	ret << "Chars = {\n\t\tOne = " << oneCh << ";\n\t\tZero = " << defaultCh << ";\n\t};";
+	ret << "Chars = {\n\t\tOne = " << oneCh << ";\n\t\tZero = " << getDefaultChar() << ";\n\t};";
 	return ret.str();
 }

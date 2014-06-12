@@ -10,7 +10,7 @@ const int InvalidRuleException = 6;
  */
 class RuleAutomaton : public CellularAutomaton
 {
-protected:
+private:
 	/**
 	 * rule for the cellular automaton
 	 */
@@ -90,7 +90,7 @@ public:
 	 * @return
 	 *				The rule as a string.
 	 */
-	string getRule();
+	string getRule() const;
 
 	/**
 	 * Sets the rule with the given rule string

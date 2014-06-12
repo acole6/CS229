@@ -65,7 +65,7 @@ RuleAutomaton& RuleAutomaton::operator=(const RuleAutomaton &ruleAutomaton)
  * @return
  *				The rule as a string.
  */
-string RuleAutomaton::getRule()
+string RuleAutomaton::getRule() const
 {
 	return rule;
 }

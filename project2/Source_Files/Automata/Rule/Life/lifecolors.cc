@@ -87,7 +87,7 @@ Color* LifeColors::getAliveColor()
 string LifeColors::toString()
 {
 	ostringstream ret;
-	ret << "Colors = {\n\t\tAlive = " << aliveCl.toString() << ";\n\t\tDead = " << defaultCl.toString() << ";\n\t};";
+	ret << "Colors = {\n\t\tAlive = " << aliveCl.toString() << ";\n\t\tDead = " << getDefaultColor()->toString() << ";\n\t};";
 	return ret.str();
 }
 
@@ -101,5 +101,5 @@ string LifeColors::toString()
 void LifeColors::init(Color aliveCl, Color defaultCl)
 {
 	this->aliveCl = aliveCl;
-	this->defaultCl = defaultCl;
+	setDefaultColor(defaultCl);
 }

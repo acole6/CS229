@@ -15,6 +15,7 @@ const int InvalidColorException = 8;
  */
 class Color
 {
+private:
 	/**
 	 * 3 color channels for RGB
 	 */

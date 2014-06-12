@@ -12,7 +12,7 @@ using namespace std;
  */
 class Chars
 {
-protected:
+private:
 	/**
 	 * default character
 	 */
@@ -58,7 +58,7 @@ public:
 	 * @return 
 	 *			The default character value as an int.
 	 */
-	int getDefaultChar();
+	int getDefaultChar() const;
 
 	/**
 	 * Sets the default character value.
