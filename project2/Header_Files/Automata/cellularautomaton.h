@@ -122,10 +122,25 @@ public:
 	 */
 	string getName() const;
 
+	/**
+	 * Sets Chars to the given Chars
+	 * @param chars
+	 * 			The given Chars to set Chars to.
+	 * /
 	void setChars(Chars *chars);
 
+	/**
+	 * Sets Colors to the given Colors
+	 * @param colors
+	 * 			The given Colors to set Colors to.
+	 * /
 	void setColors(Colors *colors);
 
+	/**
+	 * Sets Initial to the given Initial
+	 * @param initial
+	 * 			The given Initial to set Initial to.
+	 * /
 	void setInitial(Initial *initial);
 
 	/**
