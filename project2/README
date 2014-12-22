@@ -33,9 +33,9 @@ proper format, this parser will ignore extra identifiers that may be in the file
 and not say the file is invalid due to extra identifiers.
 
 I also have a Settings class that is responsible for reading the command line and assigning values to 
-flags if given. It also strips comments away and whitespace from the file or from cin to get it ready for 
-AutomatonParser to parse it. The settings class will get the last switch of any certain type, but will get 
-the first readable file. Below are some examples:
+flags if given. It also strips comments away and whitespace from the file or from cin to get it ready 
+for AutomatonParser to parse it. The settings class will get the last switch of any certain type, but 
+will get the first readable file. Below are some examples:
 
 ./life file -g 2 -g 10
 This will set the generation to 10.
@@ -53,8 +53,8 @@ This will actually determine the generation to be the default of 0 instead of th
 This will throw an InvalidArgumentException because the generation is not allowed to be less than 0.
 
 ./life file -g 0 -tx -100.100
-This will throw an InvalidRangeException. It will also do that if low is higher than high. -100...100 will 
-probably still work and interpret high to be 0.
+This will throw an InvalidRangeException. It will also do that if low is higher than high. -100...100 
+will probably still work and interpret high to be 0.
 
 ./lifegui file -s -tx -100..100
 This will set size to the default value of 10.
