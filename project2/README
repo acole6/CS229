@@ -215,8 +215,8 @@ Implements color.h This class stores a color in an int vector where position 0 i
 is blue
 --------------------------------------------------------------------------------------------------------
 colors.cc
-Implements colors.h This is an abstract class that stores automaton colors. It has a default color value. 
-It is extended by BrianColors, LifeColors and ElemetnaryColors.
+Implements colors.h This is an abstract class that stores automaton colors. It has a default color 
+value. It is extended by BrianColors, LifeColors and ElemetnaryColors.
 --------------------------------------------------------------------------------------------------------
 briancolors.cc
 Implements briancolors.h. Brian's Brain colors, which are refactory (default), ready and firing.
@@ -260,23 +260,23 @@ Implements elementary.h Elemetnary automaton. This extends RuleAutomaton. Its ru
 0-255 (inclusive).
 --------------------------------------------------------------------------------------------------------
 automatonparser.cc
-Implements automatonarser.h. This class parses though a automaton file that has been stripped of comments 
-and whitespace and breaks it up into key-value pairs or identifier-value pairs
+Implements automatonarser.h. This class parses though a automaton file that has been stripped of 
+comments and whitespace and breaks it up into key-value pairs or identifier-value pairs
 --------------------------------------------------------------------------------------------------------
 range.cc
 Implements range.h. This class stores values from wither a terrain struct or window struct. Its values 
 can be updated based on command line values
 --------------------------------------------------------------------------------------------------------
 settings.cc
-Implements settings.h This class keeps track of all the settings entered in on the command line and makes 
-it easier for the programs to access them. Also strips the info in the life file or from standard input 
-of comments and whitespace.
+Implements settings.h This class keeps track of all the settings entered in on the command line and 
+makes it easier for the programs to access them. Also strips the info in the life file or from standard 
+input of comments and whitespace.
 --------------------------------------------------------------------------------------------------------
 world.cc
 Implements world.h. This class creates a grid to represent a life to be simulated through multiple 
-generations. It uses a cellular automaton to create the world and stores it into a vector of Cell vectors 
-like a 2D array. It updates the automaton with non-default cells once the simulation is over and is used 
-to print out the grid in ascii or the gui by either using the terrain or window ranges.
+generations. It uses a cellular automaton to create the world and stores it into a vector of Cell 
+vectors like a 2D array. It updates the automaton with non-default cells once the simulation is over and
+is used to print out the grid in ascii or the gui by either using the terrain or window ranges.
 --------------------------------------------------------------------------------------------------------
 lifewidget.cc
 Implements lifewidget.h. This class extends QWidget and is used to paint the world by terrain or window 
@@ -290,8 +290,8 @@ the generations of a cellular automaton.
 Header Files:
 
 cell.h
-Cell class description and function prototypes. An enum class called State is included in this file. Enums:
-DEFAULT, ALIVE, ONE, READY, and FIRING
+Cell class description and function prototypes. An enum class called State is included in this file. 
+Enums: DEFAULT, ALIVE, ONE, READY, and FIRING
 --------------------------------------------------------------------------------------------------------
 chars.h
 Chars class description and function prototypes.
