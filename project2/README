@@ -4,13 +4,13 @@
 ########################################################################################################
 
 I have two main classes, which are CellularAutomaton and World. The CellularAutomaton class stores 
-everything in an automaton file, so it has the terrain, window, colors, chars, name, initial and rule (if 
-required). It is responsible for storing and those value and updating the window and terrain if they 
+everything in an automaton file, so it has the terrain, window, colors, chars, name, initial and rule 
+(if required). It is responsible for storing and those value and updating the window and terrain if they 
 happen to be passed in on the command line. It also determines the next state of a cell base on the type 
 of cellular automaton. The values that do not need to be included in the automaton file are window and 
-name. It is all right for the initial cells struct to have no cells for any of its identifiers. If no name 
-is specified, the name is blank or empty. If no window is specified, the value is NULL. CellularAutomaton 
-is also responsible for printing out the automaton in automaton file format.
+name. It is all right for the initial cells struct to have no cells for any of its identifiers. If no 
+name is specified, the name is blank or empty. If no window is specified, the value is NULL. 
+CellularAutomaton is also responsible for printing out the automaton in automaton file format.
 
 CellularAutomaton is an abstract class and has two classes that extend it: Brian and RuleAutomaton. Brian 
 is the Brian's Brain automaton and RuleAutomaton is an abstract class for automaton that have a rule that 
@@ -19,9 +19,9 @@ automaton and Elementary automaton, respectively.
 
 The World class has more work to do as it is responsible for converting the Terrain in the Life class into 
 a 2D grid that is the world. I have the grid stored as a vector of cell vectors. The world can simulate 
-life based on the rules of the automaton when it is given a number of generations to simulate. Since it has
-its own internal CellularAutomaton object, it can update that life object after the generations have been 
-simulated.
+life based on the rules of the automaton when it is given a number of generations to simulate. Since it 
+has its own internal CellularAutomaton object, it can update that life object after the generations have 
+been simulated.
 
 The AutomatonParser class is also important because it reads through an automaton file and gets the values 
 of all the data to make the other classes' job that much easier. It parses through the file and stores the 
