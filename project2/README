@@ -12,28 +12,28 @@ name. It is all right for the initial cells struct to have no cells for any of i
 name is specified, the name is blank or empty. If no window is specified, the value is NULL. 
 CellularAutomaton is also responsible for printing out the automaton in automaton file format.
 
-CellularAutomaton is an abstract class and has two classes that extend it: Brian and RuleAutomaton. Brian 
-is the Brian's Brain automaton and RuleAutomaton is an abstract class for automaton that have a rule that 
-can change. The classes that extend Rule Automaton are Life and Elementary, which are the Life-like 
-automaton and Elementary automaton, respectively.
+CellularAutomaton is an abstract class and has two classes that extend it: Brian and RuleAutomaton. 
+Brian is the Brian's Brain automaton and RuleAutomaton is an abstract class for automaton that have a 
+rule that can change. The classes that extend Rule Automaton are Life and Elementary, which are the 
+Life-like automaton and Elementary automaton, respectively.
 
-The World class has more work to do as it is responsible for converting the Terrain in the Life class into 
-a 2D grid that is the world. I have the grid stored as a vector of cell vectors. The world can simulate 
-life based on the rules of the automaton when it is given a number of generations to simulate. Since it 
-has its own internal CellularAutomaton object, it can update that life object after the generations have 
-been simulated.
+The World class has more work to do as it is responsible for converting the Terrain in the Life class 
+into a 2D grid that is the world. I have the grid stored as a vector of cell vectors. The world can 
+simulate life based on the rules of the automaton when it is given a number of generations to simulate. 
+Since it has its own internal CellularAutomaton object, it can update that life object after the 
+generations have been simulated.
 
-The AutomatonParser class is also important because it reads through an automaton file and gets the values 
-of all the data to make the other classes' job that much easier. It parses through the file and stores the 
-data in a key-value pair with the identifier as the key and the struct or whatever is after the = as the 
-value. For example if I read through { Alive = 64; Dead = 124 }, then it would stored as key = Alive and 
-value = 64 and key = Dead and value = 124, so if I called chars["Alive"], I would get 64 as a string value 
-or an empty string if there was no value to be found. As long as the file is in proper format, this parser 
-will ignore extra identifiers that may be in the file. It will ignore them and not say the file is invalid 
-due to extra identifiers.
+The AutomatonParser class is also important because it reads through an automaton file and gets the 
+values of all the data to make the other classes' job that much easier. It parses through the file and 
+stores the data in a key-value pair with the identifier as the key and the struct or whatever is after 
+the = as the value. For example if I read through { Alive = 64; Dead = 124 }, then it would stored as 
+key = Alive and value = 64 and key = Dead and value = 124, so if I called chars["Alive"], I would get 
+64 as a string value or an empty string if there was no value to be found. As long as the file is in 
+proper format, this parser will ignore extra identifiers that may be in the file. It will ignore them 
+and not say the file is invalid due to extra identifiers.
 
-I also have a Settings class that is responsible for reading the command line and assigning values to flags
-if given. It also strips comments away and whitespace from the file or from cin to get it ready for 
+I also have a Settings class that is responsible for reading the command line and assigning values to 
+flags if given. It also strips comments away and whitespace from the file or from cin to get it ready for 
 AutomatonParser to parse it. The settings class will get the last switch of any certain type, but will get 
 the first readable file. Below are some examples:
 
