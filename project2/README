@@ -1,7 +1,3 @@
-Alex Cole
-acole6
-Com S 229
-Project 2
 
 ##########################################################################################################
 # CLASS STRUCTURE
@@ -107,38 +103,6 @@ Button functionality:
            The simulation simulates one generation at a time.
 -Step    - This will simulate one generation and then update the GuiWidget. If the simulation was started,
            this will stop it but will not alter the delay or grid size.
-
-##########################################################################################################
-# ASSUMPTIONS
-##########################################################################################################
-
-1. that wrap around meant that if the window was expanded past the terrain values, it would print a 
-wrapped around version of the terrain
-2. that if the value for a cell given in the initial file went outside of the terrain, it would be wrapped
-around to fit in terrain and included in the initial cells instead of just being ignored.
-3. that the name being missing form the file is not critical and could just be blank
-4. that the xrange and yrange values could be interpreted like a graph as shown below:
-            
-         + y |
-             |
--------------|----------
-- x          |      + x
-         - y |
-		 
-5. Didn't need to be completely memory leak free (Gui causes some confusing memory issues with valgrind)
-6. that a quoted value in the life file would not have quotes, =, {, } or ; in it
-7. that making the window display nicely was not required
-8. grid size default is 10
-9. okay to have global variables for exceptions
-10. that unsigned and signed integer comparison warnings aren't a big deal
-11. that extra crap spit out by qmake makefile can be ignored for the most part (warnings caused by extra 
-flags)
-12. that identifies will be case sensitive, such as Life, Terrain, etc.
-13. that both the B and the S must be present in the life-like rule.
-14. that B/S rule is invalid, but that duplicates are okay and will just be ignored i.e. B00001/S23333 will
-be treated like B01/S23
-15. that there would not be more than one of any of the identifiers in the automaton fie. If there are, 
-though, mine will grab the most recent identifier value.
 
 ##########################################################################################################
 # SOURCE CODE
