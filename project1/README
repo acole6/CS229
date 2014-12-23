@@ -234,8 +234,8 @@ program is given invalid settings. x and y have default values of 0 if not given
 not a number is given in their place.
 
 If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully 
-with an error message. This program assumes that the infile will be a simp file and not any other type of 
-file. it also assumes that the simp file width and height will be positive values. The resulting file 
+with an error message. This program assumes that the infile will be a simp file and not any other type 
+of file. it also assumes that the simp file width and height will be positive values. The resulting file 
 will be an image with the top image overlaid on the bottom image. The resulting file should be a valid 
 simp file. The original bottomfile and topfile will not be altered.
 
@@ -296,59 +296,59 @@ data structures after a simp file is read.
 ########################################################################################################
 
 act.h
-----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 This is a header file that has the structs described at the beginning of this document that are used to 
 store the data within a act file. Also in this file are function prototypes that are associated with 
 reading act files and making use of the act file data stored in the act data structures.
 
 act.c
-----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 This is the implementation of the function prototypes in the header file act.h. The functions in this 
-file are designed to help read act files, as well make use of the data stored in act file data structures 
-after an act file is read.
+file are designed to help read act files, as well make use of the data stored in act file data 
+structures after an act file is read.
 
 ########################################################################################################
 # font
 ########################################################################################################
 
 fsf.h
-----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 This is a header file that has the structs described at the beginning of this document that are used to 
 store the data within a fsf file. Also in this file are function prototypes that are associated with 
 reading fsf files and making use of the fsf file data stored in the act data structures.
 
 fsf.c
-----------------------------------------------------------------------------------------------------------
-This is the implementation of the function prototypes in the header file fsf.h. The functions in this file
-are designed to help read fsf files, as well make use of the data stored in fsf file data structures after
-a fsf file is read.
+-------------------------------------------------------------------------------------------------------
+This is the implementation of the function prototypes in the header file fsf.h. The functions in this 
+file are designed to help read fsf files, as well make use of the data stored in fsf file data 
+structures after a fsf file is read.
 
 ########################################################################################################
 # meme
 ########################################################################################################
 
 mem.h
-----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 This is a header file that has the structs described at the beginning of this document that are used to 
 store the data within a mem file. Also in this file are function prototypes that are associated with 
 reading mem files and making use of the mem file data stored in the mem data structures.
 
 mem.c
-----------------------------------------------------------------------------------------------------------
-This is the implementation of the function prototypes in the header file mem.h. The functions in this file
-are designed to help read mem files, as well make use of the data stored in mem file data structures after
-a mem file is read.
+-------------------------------------------------------------------------------------------------------
+This is the implementation of the function prototypes in the header file mem.h. The functions in this 
+file are designed to help read mem files, as well make use of the data stored in mem file data 
+structures after a mem file is read.
 
 ########################################################################################################
 # utility
 ########################################################################################################
 
 utility.h
-----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 This is a header file with prototypes that could be useful to all of the different source code files
 
 utility.c
-----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 This is the implementation of the prototypes in utility.h
 
 ########################################################################################################
@@ -357,6 +357,6 @@ This is the implementation of the prototypes in utility.h
 
 I would like to clean my code up more so that it is even easier to read. Parsing the text files looks 
 sloppy at points, so I would like to make that nicer. Create more functions and organize the code in a 
-nicer way. Also I would like to redesign many of the functions to make sure it is easier to keep track of 
-when memory needs to be freed to prevent seg faults and leaks. And of course, do more testing and add more
-checks for potential errors.
+nicer way. Also I would like to redesign many of the functions to make sure it is easier to keep track 
+of when memory needs to be freed to prevent seg faults and leaks. And of course, do more testing and add 
+more checks for potential errors.
