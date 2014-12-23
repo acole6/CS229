@@ -1,7 +1,7 @@
 
-##########################################################################################################
+########################################################################################################
 # SIMP IMAGE DATA STORAGE
-##########################################################################################################
+########################################################################################################
 
 /*struct to store 32-bit pixel info. 0 - red, 1 - green, 2 - blue, 3 - alpha*/
 struct pixel
@@ -19,18 +19,18 @@ struct simp
 };
 typedef struct simp simp_t;
 
-I created a type called simp_t that represents my simp structure, which has an integer to store the width,
-an integer to store the height and another type I created to called pixel_t that stores a 2D array of 
-pixels.
+I created a type called simp_t that represents my simp structure, which has an integer to store the 
+width, an integer to store the height and another type I created to called pixel_t that stores a 2D 
+array of pixels.
 
-My pixel_t type is made up of a struct pixel that has an array of unsigned chars to store the pixel color.
-0 is the red channel, 1 is the green channel, 2 is the blue channel and 3 is the alpha channel. I 
-originally had 4 separate chars, which made it more obvious what channel was what, but the array makes it 
-easier to write code with less lines (i.e. loops and passings the color as a parameter).
+My pixel_t type is made up of a struct pixel that has an array of unsigned chars to store the pixel 
+color.0 is the red channel, 1 is the green channel, 2 is the blue channel and 3 is the alpha channel. 
+I originally had 4 separate chars, which made it more obvious what channel was what, but the array 
+makes it easier to write code with less lines (i.e. loops and passings the color as a parameter).
 
-##########################################################################################################
+########################################################################################################
 # ACT FILE DATA STOREAGE
-##########################################################################################################
+########################################################################################################
 
 /*struct stores text id and the text in value*/
 struct line
@@ -55,9 +55,9 @@ For the action file, I created two structs to store the data in the file. The li
 ids, like top, bottom, etc. and the value is the actual text that will get overlaid. The act struct stores
 multiple line structs, as well as the outfile, the meme and the font.
 
-##########################################################################################################
+########################################################################################################
 # FSF FILE DATA STORAGE
-##########################################################################################################
+########################################################################################################
 
 /*struct to store character data. ch is the character
 position[0] is the x pos, position[1] is the y pos, 
@@ -83,9 +83,9 @@ For the font file, I created two structs to store the data in the file. The char
 character and, as well as the x pos, the y pos, the width and the height in an int array. The fsf struct 
 has an array of characters, as well as the name and the image.
 
-##########################################################################################################
+########################################################################################################
 # MEM FILE DATA STORAGE
-##########################################################################################################
+########################################################################################################
 
 /*point struct to store width (x) and height (y)*/
 struct point
@@ -128,15 +128,15 @@ pos. The position struct stores the text id, as well as the point for the text t
 stores the name of the meme, the file of the meme and the number of text ids. The mem struct stores an 
 array of memes and an array of fonts available.
 
-##########################################################################################################
+########################################################################################################
 # SOURCE CODE
-##########################################################################################################
+########################################################################################################
 
 Programs:
 
-##########################################################################################################
+########################################################################################################
 # crop
-##########################################################################################################
+########################################################################################################
 Usage: ./crop infile outfile x y width height
 
 infile  - should be a simp file
@@ -163,9 +163,9 @@ file. it also assumes that the simp file width and height will be positive value
 be a cropped version of the original simp file bassed on the arguments passed. The resulting file should 
 be a valid simp file. The original file is not altered.
 
-##########################################################################################################
+########################################################################################################
 # bw
-##########################################################################################################
+########################################################################################################
 Usage: ./bw infile outfile
 
 infile  - should be a simp file
@@ -186,9 +186,9 @@ channels and flooring the result. The original file is not altered.
 For example, floor((red + green + blue) / 3), where the input in floor is a double/float value. This is 
 not what the actual code looks like, but is the basic idea. 
 
-##########################################################################################################
+########################################################################################################
 # colorshift
-##########################################################################################################
+########################################################################################################
 Usage: ./colorshift infile outfile pattern
 
 infile  - should be a simp file
@@ -213,9 +213,9 @@ Explanation of the color shift:
 If the pattern given is RGB, then red replaces green, green replaces blue and blue replaces red. If the 
 pattern given is RG, then red is swapped with green.
 
-##########################################################################################################
+########################################################################################################
 # overlay
-##########################################################################################################
+########################################################################################################
 Usage: ./overlay bottomfile topfile outfile x y
 
 bottomfile - should be a simp file and will have the topfile overlaid on it
@@ -259,9 +259,9 @@ overlaid on top of the bottom image. Below is an example:
 +          +
 ------------
 
-##########################################################################################################
+########################################################################################################
 # meme
-##########################################################################################################
+########################################################################################################
 Usage: ./meme meme_file action_file
 
 meme_file   - meme file with a list of memes
@@ -289,9 +289,9 @@ This is the implementation of the function prototypes in the header file simp.h.
 file are designed to help read and write simp files, as well make use of the data stored in simp file data
 structures after a simp file is read.
 
-##########################################################################################################
+########################################################################################################
 # action
-##########################################################################################################
+########################################################################################################
 
 act.h
 ----------------------------------------------------------------------------------------------------------
@@ -305,9 +305,9 @@ This is the implementation of the function prototypes in the header file act.h. 
 file are designed to help read act files, as well make use of the data stored in act file data structures 
 after an act file is read.
 
-##########################################################################################################
+########################################################################################################
 # font
-##########################################################################################################
+########################################################################################################
 
 fsf.h
 ----------------------------------------------------------------------------------------------------------
@@ -321,9 +321,9 @@ This is the implementation of the function prototypes in the header file fsf.h. 
 are designed to help read fsf files, as well make use of the data stored in fsf file data structures after
 a fsf file is read.
 
-##########################################################################################################
+########################################################################################################
 # meme
-##########################################################################################################
+########################################################################################################
 
 mem.h
 ----------------------------------------------------------------------------------------------------------
@@ -337,9 +337,9 @@ This is the implementation of the function prototypes in the header file mem.h. 
 are designed to help read mem files, as well make use of the data stored in mem file data structures after
 a mem file is read.
 
-##########################################################################################################
+########################################################################################################
 # utility
-##########################################################################################################
+########################################################################################################
 
 utility.h
 ----------------------------------------------------------------------------------------------------------
@@ -349,9 +349,9 @@ utility.c
 ----------------------------------------------------------------------------------------------------------
 This is the implementation of the prototypes in utility.h
 
-##########################################################################################################
+########################################################################################################
 # TODO
-##########################################################################################################
+########################################################################################################
 
 I would like to clean my code up more so that it is even easier to read. Parsing the text files looks 
 sloppy at points, so I would like to make that nicer. Create more functions and organize the code in a 
