@@ -51,9 +51,9 @@ struct act
 };
 typedef struct act act_t;
 
-For the action file, I created two structs to store the data in the file. The line struct stores the text 
-ids, like top, bottom, etc. and the value is the actual text that will get overlaid. The act struct stores
-multiple line structs, as well as the outfile, the meme and the font.
+For the action file, I created two structs to store the data in the file. The line struct stores the 
+text ids, like top, bottom, etc. and the value is the actual text that will get overlaid. The act struct
+stores multiple line structs, as well as the outfile, the meme and the font.
 
 ########################################################################################################
 # FSF FILE DATA STORAGE
@@ -146,22 +146,22 @@ x       - staring position for cropping. range is 0 to width - 1
 y       - starting position for cropping. range is 0 to height - 1
 width   - the width of the resulting cropped file. range is from 1 to width - x. this is in order to not  
           exceed the original image's bounds
-height  - the height of the resulting cropped file. range is from 1 to height - y. this is in order to not
-          exceed the original image's bounds
+height  - the height of the resulting cropped file. range is from 1 to height - y. this is in order to 
+	  not exceed the original image's bounds
 
 This file is the source code for the crop program. It makes use of simp.h in order to crop a file given 
 the specified dimensions. If all goes well, crop produces a cropped image. The program will exit 
-gracefully if the program is given invalid settings. x and y have default values of 0 if not given or if 
-something that is not a number is given in their place. If width and height are not given, they have a 
-default value of the original image's width and height. If the argument given is not a number for the 
-width or height, the program will exit gracefully due to the width and height value will get converted to 
-0 and that is outside of the 1 to width/height - x/y range.
+gracefully if the program is given invalid settings. x and y have default values of 0 if not given or 
+if something that is not a number is given in their place. If width and height are not given, they have 
+a default value of the original image's width and height. If the argument given is not a number for the 
+width or height, the program will exit gracefully due to the width and height value will get converted 
+to 0 and that is outside of the 1 to width/height - x/y range.
 
 If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully 
-with an error message. This program assumes that the infile will be a simp file and not any other type of 
-file. it also assumes that the simp file width and height will be positive values. The resulting file will
-be a cropped version of the original simp file bassed on the arguments passed. The resulting file should 
-be a valid simp file. The original file is not altered.
+with an error message. This program assumes that the infile will be a simp file and not any other type 
+of file. it also assumes that the simp file width and height will be positive values. The resulting file
+will be a cropped version of the original simp file bassed on the arguments passed. The resulting file 
+should be a valid simp file. The original file is not altered.
 
 ########################################################################################################
 # bw
@@ -172,16 +172,16 @@ infile  - should be a simp file
 outfile - any valid filename. if it is an existing file, it will be overwritten (hopefully it wasn't 
           important)
 
-This file is the source code for the bw program. It makes use of simp.h in order to convert a simp file to
-black and white. If all goes well, bw produces a black and white image. The program will exit gracefully 
-if the program is given invalid settings.
+This file is the source code for the bw program. It makes use of simp.h in order to convert a simp file 
+to black and white. If all goes well, bw produces a black and white image. The program will exit 
+gracefully if the program is given invalid settings.
 
 If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully 
-with an error message. This program assumes that the infile will be a simp file and not any other type of 
-file. it also assumes that the simp file width and height will be positive values. The resulting file will
-be a black and white version of the original simp file. The resulting file should be a valid simp file. 
-The black and white values are are calculated by taking the average of each pixels red, blue and green 
-channels and flooring the result. The original file is not altered.
+with an error message. This program assumes that the infile will be a simp file and not any other type 
+of file. it also assumes that the simp file width and height will be positive values. The resulting file 
+will be a black and white version of the original simp file. The resulting file should be a valid simp 
+file. The black and white values are are calculated by taking the average of each pixels red, blue and 
+green channels and flooring the result. The original file is not altered.
 
 For example, floor((red + green + blue) / 3), where the input in floor is a double/float value. This is 
 not what the actual code looks like, but is the basic idea. 
@@ -197,16 +197,16 @@ outfile - any valid filename. if it is an existing file, it will be overwritten 
 pattern - string in the form of one of the following: RGB GBR BRG RBG BGR GRB RG GR RB BR GB BG
 
 This file is the source code for the colorshift program. It makes use of simp.h in order to shift the 
-color channels values of a given simp file. If all goes well, colorshift produces an image with its color 
-channels shift based on the given pattern. The program will exit gracefully if the program is given 
-invalid settings. If the pattern does not match one of the patterns listed above, the program will exit 
-gracefully with and error message stating that the pattern is invalid. The pattern must be given as all 
-upper case letters with no spaces or characters between the letters.
+color channels values of a given simp file. If all goes well, colorshift produces an image with its 
+color channels shift based on the given pattern. The program will exit gracefully if the program is 
+given invalid settings. If the pattern does not match one of the patterns listed above, the program will 
+exit gracefully with and error message stating that the pattern is invalid. The pattern must be given as 
+all upper case letters with no spaces or characters between the letters.
 
 If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully 
-with an error message. This program assumes that the infile will be a simp file and not any other type of 
-file. it also assumes that the simp file width and height will be positive values. The resulting file will
-be a shifted version of the original simp file. The resulting file should be a valid simp file. The 
+with an error message. This program assumes that the infile will be a simp file and not any other type 
+of file. it also assumes that the simp file width and height will be positive values. The resulting file 
+will be a shifted version of the original simp file. The resulting file should be a valid simp file. The 
 original file is not altered.
 
 Explanation of the color shift:
@@ -222,8 +222,10 @@ bottomfile - should be a simp file and will have the topfile overlaid on it
 topfile    - should be a simp file and will be overlaid on the bottomfile
 outfile    - any valid filename. if it is an existing file, it will be overwritten (hopefully it wasn't 
              important)
-x          - staring in bottomfile image for the topfile image to be overlaid on. range is 0 to width - 1
-y          - staring in bottomfile image for the topfile image to be overlaid on. range is 0 to height - 1
+x          - staring in bottomfile image for the topfile image to be overlaid on. range is 0 to 
+	     width - 1
+y          - staring in bottomfile image for the topfile image to be overlaid on. range is 0 to 
+	     height - 1
 
 This file is the source code for the overlay program. It makes use of simp.h in order to overlay a simp 
 file image on top of another simple image given the specified dimensions. If all goes well, overlay 
@@ -233,12 +235,12 @@ not a number is given in their place.
 
 If there is a problem reading the infile (assuming it is a simp file), the program will exit gracefully 
 with an error message. This program assumes that the infile will be a simp file and not any other type of 
-file. it also assumes that the simp file width and height will be positive values. The resulting file will
-be an image with the top image overlaid on the bottom image. The resulting file should be a valid simp 
-file. The original bottomfile and topfile will not be altered.
+file. it also assumes that the simp file width and height will be positive values. The resulting file 
+will be an image with the top image overlaid on the bottom image. The resulting file should be a valid 
+simp file. The original bottomfile and topfile will not be altered.
 
-Overlay will not exceed or extend the width and height of the bottom image, so if the top image happens to
-go beyond the bounds of the bottom image, the portion of the top image beyond the bounds will not be 
+Overlay will not exceed or extend the width and height of the bottom image, so if the top image happens 
+to go beyond the bounds of the bottom image, the portion of the top image beyond the bounds will not be 
 overlaid on top of the bottom image. Below is an example:
 
 ------------    	    ------------
@@ -268,26 +270,26 @@ meme_file   - meme file with a list of memes
 action_file - action file used to generate a meme
 
 This file is the source code for the meme program. It makes use of simp.h, act.h, mem.h, fsf.h and 
-utility.h in order generate a meme. It reads a meme file and an action file in order to generate the meme.
-The files are stored in separate structs and the action file is used to find which meme to overlay on 
-image. To overlay the font, the functions from the crop and overlay program are used. The program is 
+utility.h in order generate a meme. It reads a meme file and an action file in order to generate the 
+meme. The files are stored in separate structs and the action file is used to find which meme to overlay 
+on image. To overlay the font, the functions from the crop and overlay program are used. The program is 
 designed not to fail if positions in the action file are not in the meme file or if characters in the 
-phrases overlaid on the image are not in the font file. In those cases a meme will still be generated with
-the information that the action file was able to find from the meme and font files. 
+phrases overlaid on the image are not in the font file. In those cases a meme will still be generated 
+with the information that the action file was able to find from the meme and font files. 
 
 Helper Code:
 
 simp.h
-----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 This is a header file that has the structs described at the beginning of this document that are used to 
 store the data within a simp file. Also in this file are function prototypes that are associated with 
 reading simp files and making use of the simp file data stored in the simp data structures.
 
 simp.c
-----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 This is the implementation of the function prototypes in the header file simp.h. The functions in this 
-file are designed to help read and write simp files, as well make use of the data stored in simp file data
-structures after a simp file is read.
+file are designed to help read and write simp files, as well make use of the data stored in simp file 
+data structures after a simp file is read.
 
 ########################################################################################################
 # action
