@@ -19,7 +19,7 @@ int main(int argc, char*argv[])
 	}
 	
 	/*read bottom image info*/
-	if(read_simp_file(argv[1], &imagebottom) != 0) { return 1; }
+	if(read_simp_file(argv[1], &imagebottom) != 0) return 1;
 			
 	/*reads top image info*/
 	if(read_simp_file(argv[2], &imagetop) != 0) 
