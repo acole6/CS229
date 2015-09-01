@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "string.h"
 #include "mem.h"
-#include "utility.h"
+#include "../utility/utility.h"
 
 /**
 * Implementation of mem prototypes in mem.h

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "string.h"
 #include "act.h"
-#include "utility.h"
+#include "../utility/utility.h"
 
 /**
 * Implementation of act prototypes in act.h

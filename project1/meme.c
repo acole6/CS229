@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "string.h"
-#include "act.h"
-#include "fsf.h"
-#include "mem.h"
+#include "action/act.h"
+#include "font/fsf.h"
+#include "meme/mem.h"
 #include "simp.h"
 
 int main(int argc, char *argv[])
