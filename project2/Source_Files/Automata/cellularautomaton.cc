@@ -13,138 +13,138 @@
  */
 CellularAutomaton::CellularAutomaton()
 {
-	setToDefaults();
+    setToDefaults();
 }
 
 /**
  * Constructs a cellular automaton with a given
  * automaton struct.
  * @param automatonStruct
- *			The automaton struct.
+ *          The automaton struct.
  */
 CellularAutomaton::CellularAutomaton(string automatonStruct)
 {
-	setToDefaults();
-	map<string, string> automaton = AutomatonParser::parse(automatonStruct);
-	name = automaton["Name"];
-	terrain = new Range(AutomatonParser::getValue(automaton, "Terrain", true));
-	string windowStruct = automaton["Window"];
-	if(!windowStruct.empty()) window = new Range(windowStruct);
+    setToDefaults();
+    map<string, string> automaton = AutomatonParser::parse(automatonStruct);
+    name = automaton["Name"];
+    terrain = new Range(AutomatonParser::getValue(automaton, "Terrain", true));
+    string windowStruct = automaton["Window"];
+    if(!windowStruct.empty()) window = new Range(windowStruct);
 }
 
 /**
  * Destructor
  */
-CellularAutomaton::~CellularAutomaton() 
+CellularAutomaton::~CellularAutomaton()
 {
-	delete terrain;
-	delete window;
-	delete chars;
-	delete colors;
-	delete initial;
+    delete terrain;
+    delete window;
+    delete chars;
+    delete colors;
+    delete initial;
 }
 
 /**
  * Copy constructor.
- * @param automaton 
- *			The automaton to be copied.
+ * @param automaton
+ *          The automaton to be copied.
  */
 CellularAutomaton::CellularAutomaton(const CellularAutomaton &automaton)
 {
-	name = automaton.name;
-	terrain = automaton.terrain != NULL ? new Range(*(automaton.terrain)) : NULL;
-	window =  automaton.window != NULL ? new Range(*(automaton.window)) : NULL;
+    name = automaton.name;
+    terrain = automaton.terrain != NULL ? new Range(*(automaton.terrain)) : NULL;
+    window =  automaton.window != NULL ? new Range(*(automaton.window)) : NULL;
 }
 
 /**
  * Overloaded assignment operator
- * @param automaton 
- *			The automaton to be copied
- * @return 
- *			A copy of the the given automaton
+ * @param automaton
+ *          The automaton to be copied
+ * @return
+ *          A copy of the the given automaton
  */
 CellularAutomaton& CellularAutomaton::operator=(const CellularAutomaton &automaton)
 {
-	if(this == &automaton) return *this;
-	name = automaton.name;
-	terrain = automaton.terrain != NULL ? new Range(*(automaton.terrain)) : NULL;
-	window =  automaton.window != NULL ? new Range(*(automaton.window)) : NULL;
-	return *this;
+    if(this == &automaton) return *this;
+    name = automaton.name;
+    terrain = automaton.terrain != NULL ? new Range(*(automaton.terrain)) : NULL;
+    window =  automaton.window != NULL ? new Range(*(automaton.window)) : NULL;
+    return *this;
 }
 
 /**
  * Gets the terrain.
- * @return 
- *			A pointer to the terrain.
+ * @return
+ *          A pointer to the terrain.
  */
 Range* CellularAutomaton::getTerrain() const
 {
-	return terrain;
+    return terrain;
 }
 
 /**
  * Gets the window.
- * @return 
- *			A pointer to the window.
+ * @return
+ *          A pointer to the window.
  */
 Range* CellularAutomaton::getWindow() const
 {
-	return window;
+    return window;
 }
 
 /**
  * Gets the chars.
- * @return 
- *			A pointer to the chars.
+ * @return
+ *          A pointer to the chars.
  */
 Chars* CellularAutomaton::getChars() const
 {
-	return chars;
+    return chars;
 }
 
 /**
  * Gets the colors.
- * @return 
- *			A pointer to the colors.
+ * @return
+ *          A pointer to the colors.
  */
 Colors* CellularAutomaton::getColors() const
 {
-	return colors;
+    return colors;
 }
 
 /**
  * Gets the initial.
- * @return 
- *			A pointer to the initial.
+ * @return
+ *          A pointer to the initial.
  */
 Initial* CellularAutomaton::getInitial() const
 {
-	return initial;
+    return initial;
 }
 
 /**
  * Gets the name.
- * @return 
- *			The name of the automaton.
+ * @return
+ *          The name of the automaton.
  */
 string CellularAutomaton::getName() const
 {
-	return name;
+    return name;
 }
 
 void CellularAutomaton::setChars(Chars *chars)
 {
-	this->chars = chars;
+    this->chars = chars;
 }
 
 void CellularAutomaton::setColors(Colors *colors)
 {
-	this->colors = colors;
+    this->colors = colors;
 }
 
 void CellularAutomaton::setInitial(Initial *initial)
 {
-	this->initial = initial;
+    this->initial = initial;
 }
 
 /**
@@ -152,54 +152,54 @@ void CellularAutomaton::setInitial(Initial *initial)
  * the window is not updated. If at least one is a range, then the
  * window is updated and the other range is set to the terrain range
  * value.
- * @param xRange 
- *				The window x range.
- * @param yRange 
- *				The window y range.
+ * @param xRange
+ *              The window x range.
+ * @param yRange
+ *              The window y range.
  */
 void CellularAutomaton::updateWindow(string xRange, string yRange)
 {
-	if(!xRange.empty() && !yRange.empty()) //both ranges are not empty
-	{
-		if(window == NULL) window = new Range();
-		window->updateRange(xRange, yRange);
-	}
-	else if(!xRange.empty() || !yRange.empty()) //one of the ranges is empty
-	{
-		if(xRange.empty() && window == NULL) //gets the terrain range if range is empty and the window is NULL
-		{
-			xRange = terrain->rangeStr(terrain->getXStart(), terrain->getXEnd());
-		}
-		if(yRange.empty() && window == NULL)
-		{
-			yRange = terrain->rangeStr(terrain->getYStart(), terrain->getYEnd());
-		}
-		if(window == NULL) window = new Range();
-		window->updateRange(xRange, yRange);
-	}
+    if(!xRange.empty() && !yRange.empty()) //both ranges are not empty
+    {
+        if(window == NULL) window = new Range();
+        window->updateRange(xRange, yRange);
+    }
+    else if(!xRange.empty() || !yRange.empty()) //one of the ranges is empty
+    {
+        if(xRange.empty() && window == NULL) //gets the terrain range if range is empty and the window is NULL
+        {
+            xRange = terrain->rangeStr(terrain->getXStart(), terrain->getXEnd());
+        }
+        if(yRange.empty() && window == NULL)
+        {
+            yRange = terrain->rangeStr(terrain->getYStart(), terrain->getYEnd());
+        }
+        if(window == NULL) window = new Range();
+        window->updateRange(xRange, yRange);
+    }
 }
 
 /**
  * Updates the terrain with the given ranges if the
  * ranges are not empty.
  * @param xRange
- *				The Terrain x range.
+ *              The Terrain x range.
  * @param yRange
- *				The Terrain y range.
+ *              The Terrain y range.
  */
 void CellularAutomaton::updateTerrain(string xRange, string yRange)
 {
-	terrain->updateRange(xRange, yRange);
+    terrain->updateRange(xRange, yRange);
 }
 
 /**
  * Sets the name of the automaton.
- * @param name 
- *				The given name to set the name value.
+ * @param name
+ *              The given name to set the name value.
  */
 void CellularAutomaton::setName(string name)
 {
-	this->name = name;
+    this->name = name;
 }
 
 /**
@@ -207,10 +207,10 @@ void CellularAutomaton::setName(string name)
  */
 void CellularAutomaton::setToDefaults()
 {
-	terrain = NULL;
-	window = NULL;
-	chars = NULL;
-	colors = NULL;
-	initial = NULL;
-	name = "";
+    terrain = NULL;
+    window = NULL;
+    chars = NULL;
+    colors = NULL;
+    initial = NULL;
+    name = "";
 }

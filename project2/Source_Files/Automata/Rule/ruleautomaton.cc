@@ -11,22 +11,22 @@
  * the rule to an empty string.
  */
 RuleAutomaton::RuleAutomaton()
-	: CellularAutomaton()
+    : CellularAutomaton()
 {
-	rule = "";
+    rule = "";
 }
 
 /**
  * Takes in rule automaton struct and assigns values from struct
  * to rule automaton.
  * @param ruleAutomatonStruct
- *				The string rule automaton struct.
+ *              The string rule automaton struct.
  */
 RuleAutomaton::RuleAutomaton(string ruleAutomatonStruct)
-	: CellularAutomaton(ruleAutomatonStruct)
+    : CellularAutomaton(ruleAutomatonStruct)
 {
-	map<string, string> ruleAutomaton = AutomatonParser::parse(ruleAutomatonStruct);
-	rule = AutomatonParser::getValue(ruleAutomaton, "Rule", true);
+    map<string, string> ruleAutomaton = AutomatonParser::parse(ruleAutomatonStruct);
+    rule = AutomatonParser::getValue(ruleAutomaton, "Rule", true);
 }
 
 /**
@@ -37,45 +37,45 @@ RuleAutomaton::~RuleAutomaton() {}
 /**
  * Copy constructor.
  * @param ruleAutomaton
- *				The rule automaton to be copied.
+ *              The rule automaton to be copied.
  */
 RuleAutomaton::RuleAutomaton(const RuleAutomaton &ruleAutomaton)
-	: CellularAutomaton(ruleAutomaton)
+    : CellularAutomaton(ruleAutomaton)
 {
-	rule = ruleAutomaton.rule;
+    rule = ruleAutomaton.rule;
 }
 
 /**
  * Overloaded assignment operator.
  * @param ruleAutomaton
- *				The rule automaton to be copied.
+ *              The rule automaton to be copied.
  * @return
- *				A copy of the rule automaton.
+ *              A copy of the rule automaton.
  */
 RuleAutomaton& RuleAutomaton::operator=(const RuleAutomaton &ruleAutomaton)
 {
-	if(this == &ruleAutomaton) return *this;
-	CellularAutomaton::operator=(ruleAutomaton);
-	rule = ruleAutomaton.rule;
-	return *this;
+    if(this == &ruleAutomaton) return *this;
+    CellularAutomaton::operator=(ruleAutomaton);
+    rule = ruleAutomaton.rule;
+    return *this;
 }
 
 /**
  * Gets the rule.
  * @return
- *				The rule as a string.
+ *              The rule as a string.
  */
 string RuleAutomaton::getRule() const
 {
-	return rule;
+    return rule;
 }
 
 /**
  * Sets the rule with the given rule string
  * @param rule
- *				The rule string to set the rule to.
+ *              The rule string to set the rule to.
  */
 void RuleAutomaton::setRule(string rule)
 {
-	this->rule = rule;
+    this->rule = rule;
 }

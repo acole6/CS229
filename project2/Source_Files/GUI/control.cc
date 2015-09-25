@@ -9,71 +9,71 @@
  * @author Alex Cole
  */
 
- /** 
+ /**
   * Default constructor that sets up the control dialog.
   * @param parent
-  *				The parent widget. Default is NULL.
+  *             The parent widget. Default is NULL.
   */
 Control::Control(QWidget *parent)
-	:QDialog(parent)
+    :QDialog(parent)
 {
-	delay = 4000;	
-	timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(playSimulation()));
-	
-	QHBoxLayout *gridSizeLayout = new QHBoxLayout;
-	gridSizeLabel = new QLabel("Grid size: ");
-	gridSizeSpinBox = new QSpinBox;
-	gridSizeSpinBox->setRange(1, 100);
-	gridSizeSlider = new QSlider(Qt::Horizontal);
-	gridSizeSlider->setRange(1, 100);
-	connect(gridSizeSpinBox, SIGNAL(valueChanged(int)), gridSizeSlider, SLOT(setValue(int)));
-	connect(gridSizeSlider, SIGNAL(valueChanged(int)), gridSizeSpinBox, SLOT(setValue(int)));
-	connect(gridSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setGridSize()));
-	gridSizeLayout->addWidget(gridSizeLabel);
-	gridSizeLayout->addWidget(gridSizeSpinBox);
-	gridSizeLayout->addWidget(gridSizeSlider);
-	
-	QHBoxLayout *delayLayout = new QHBoxLayout;
-	delayLabel = new QLabel("Delay: ");
-	delaySpinBox = new QSpinBox;
-	delaySpinBox->setRange(0, 10000);
-	delaySlider = new QSlider(Qt::Horizontal);
-	delaySlider->setRange(0, 10000);
-	connect(delaySpinBox, SIGNAL(valueChanged(int)), delaySlider, SLOT(setValue(int)));
-	connect(delaySlider, SIGNAL(valueChanged(int)), delaySpinBox, SLOT(setValue(int)));
-	connect(delaySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setDelay()));
-	delaySpinBox->setValue(delay);
-	delayLayout->addWidget(delayLabel);
-	delayLayout->addWidget(delaySpinBox);
-	delayLayout->addWidget(delaySlider);
-	
-	QHBoxLayout *genLayout = new QHBoxLayout;
-	genLabel = new QLabel("Generation: ");
-	genNumLabel = new QLabel("0");
-	genLayout->addWidget(genLabel);
-	genLayout->addWidget(genNumLabel);
-	
-	QHBoxLayout *buttonLayout = new QHBoxLayout;
-	quit = new QPushButton("Quit");
-	restart = new QPushButton("Restart");
-	play = new QPushButton("Play");
-	step = new QPushButton("Step");
-	buttonLayout->addWidget(quit);
-	buttonLayout->addWidget(restart);
-	buttonLayout->addWidget(play);
-	buttonLayout->addWidget(step);
-	
-	connect(step, SIGNAL(clicked()), this, SLOT(stepClicked()));
-	connect(restart, SIGNAL(clicked()), this, SLOT(restartClicked()));
-	connect(play, SIGNAL(clicked()), this, SLOT(playClicked()));
-	
-	QVBoxLayout *mainLayout = new QVBoxLayout;
-	mainLayout->addLayout(gridSizeLayout);
-	mainLayout->addLayout(delayLayout);
-	mainLayout->addLayout(genLayout);
-	mainLayout->addLayout(buttonLayout);
-	setLayout(mainLayout);
+    delay = 4000;
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(playSimulation()));
+
+    QHBoxLayout *gridSizeLayout = new QHBoxLayout;
+    gridSizeLabel = new QLabel("Grid size: ");
+    gridSizeSpinBox = new QSpinBox;
+    gridSizeSpinBox->setRange(1, 100);
+    gridSizeSlider = new QSlider(Qt::Horizontal);
+    gridSizeSlider->setRange(1, 100);
+    connect(gridSizeSpinBox, SIGNAL(valueChanged(int)), gridSizeSlider, SLOT(setValue(int)));
+    connect(gridSizeSlider, SIGNAL(valueChanged(int)), gridSizeSpinBox, SLOT(setValue(int)));
+    connect(gridSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setGridSize()));
+    gridSizeLayout->addWidget(gridSizeLabel);
+    gridSizeLayout->addWidget(gridSizeSpinBox);
+    gridSizeLayout->addWidget(gridSizeSlider);
+
+    QHBoxLayout *delayLayout = new QHBoxLayout;
+    delayLabel = new QLabel("Delay: ");
+    delaySpinBox = new QSpinBox;
+    delaySpinBox->setRange(0, 10000);
+    delaySlider = new QSlider(Qt::Horizontal);
+    delaySlider->setRange(0, 10000);
+    connect(delaySpinBox, SIGNAL(valueChanged(int)), delaySlider, SLOT(setValue(int)));
+    connect(delaySlider, SIGNAL(valueChanged(int)), delaySpinBox, SLOT(setValue(int)));
+    connect(delaySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setDelay()));
+    delaySpinBox->setValue(delay);
+    delayLayout->addWidget(delayLabel);
+    delayLayout->addWidget(delaySpinBox);
+    delayLayout->addWidget(delaySlider);
+
+    QHBoxLayout *genLayout = new QHBoxLayout;
+    genLabel = new QLabel("Generation: ");
+    genNumLabel = new QLabel("0");
+    genLayout->addWidget(genLabel);
+    genLayout->addWidget(genNumLabel);
+
+    QHBoxLayout *buttonLayout = new QHBoxLayout;
+    quit = new QPushButton("Quit");
+    restart = new QPushButton("Restart");
+    play = new QPushButton("Play");
+    step = new QPushButton("Step");
+    buttonLayout->addWidget(quit);
+    buttonLayout->addWidget(restart);
+    buttonLayout->addWidget(play);
+    buttonLayout->addWidget(step);
+
+    connect(step, SIGNAL(clicked()), this, SLOT(stepClicked()));
+    connect(restart, SIGNAL(clicked()), this, SLOT(restartClicked()));
+    connect(play, SIGNAL(clicked()), this, SLOT(playClicked()));
+
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout->addLayout(gridSizeLayout);
+    mainLayout->addLayout(delayLayout);
+    mainLayout->addLayout(genLayout);
+    mainLayout->addLayout(buttonLayout);
+    setLayout(mainLayout);
 }
 
 /**
@@ -84,33 +84,33 @@ Control::~Control() {}
 /**
  * Initializes control dialog that could not be initialized in the constructor.
  * @param app
- *				The application for the dialog box.
+ *              The application for the dialog box.
  * @param world
- *				The cellular automaton world.
+ *              The cellular automaton world.
  * @param generations
- *				The initial generation.
+ *              The initial generation.
  * @param gridSize
- *				The size of the grid blocks in pixels.
+ *              The size of the grid blocks in pixels.
  */
 void Control::init(QApplication *app, World *world, int generations, int gridSize)
 {
-	this->world = world;
-	this->gridSize = gridSize;
-	
-	widget = new GuiWidget;
-	vector<vector<Color>> colorWorld = this->world->toColor();
-	string automatonName = this->world->getAutomaton()->getName();
-	widget->init(colorWorld, gridSize, automatonName);
-	widget->show();
-	
-	string name = automatonName + " Controls";
-	setWindowTitle(name.c_str());
-	
-	gridSizeSpinBox->setValue(gridSize);
-	
-	setGenNumLabel(generations);
-	
-	connect(quit, SIGNAL(clicked()), app, SLOT(quit()));
+    this->world = world;
+    this->gridSize = gridSize;
+
+    widget = new GuiWidget;
+    vector<vector<Color>> colorWorld = this->world->toColor();
+    string automatonName = this->world->getAutomaton()->getName();
+    widget->init(colorWorld, gridSize, automatonName);
+    widget->show();
+
+    string name = automatonName + " Controls";
+    setWindowTitle(name.c_str());
+
+    gridSizeSpinBox->setValue(gridSize);
+
+    setGenNumLabel(generations);
+
+    connect(quit, SIGNAL(clicked()), app, SLOT(quit()));
 }
 
 /**
@@ -119,8 +119,8 @@ void Control::init(QApplication *app, World *world, int generations, int gridSiz
  */
 void Control::stepClicked()
 {
-	timer->stop();
-	simulateOneGen();
+    timer->stop();
+    simulateOneGen();
 }
 
 /**
@@ -129,10 +129,10 @@ void Control::stepClicked()
  */
 void Control::restartClicked()
 {
-	timer->stop();
-	setGenNumLabel(0);
-	world->reset();
-	updateWidget();
+    timer->stop();
+    setGenNumLabel(0);
+    world->reset();
+    updateWidget();
 }
 
 /**
@@ -141,7 +141,7 @@ void Control::restartClicked()
  */
 void Control::playClicked()
 {
-	timer->start(delay);
+    timer->start(delay);
 }
 
 /**
@@ -149,8 +149,8 @@ void Control::playClicked()
  */
 void Control::setGridSize()
 {
-	gridSize = gridSizeSpinBox->value();
-	updateWidget();
+    gridSize = gridSizeSpinBox->value();
+    updateWidget();
 }
 
 /**
@@ -159,8 +159,8 @@ void Control::setGridSize()
  */
 void Control::setDelay()
 {
-	delay = delaySpinBox->value();
-	if(timer != NULL && timer->isActive()) timer->setInterval(delay);
+    delay = delaySpinBox->value();
+    if(timer != NULL && timer->isActive()) timer->setInterval(delay);
 }
 
 /**
@@ -168,7 +168,7 @@ void Control::setDelay()
  */
 void Control::playSimulation()
 {
-	simulateOneGen();
+    simulateOneGen();
 }
 
 /**
@@ -176,31 +176,31 @@ void Control::playSimulation()
  */
 void Control::updateWidget()
 {
-	vector<vector<Color>> colorWorld = world->toColor();
-	widget->updateImage(gridSize, colorWorld);
+    vector<vector<Color>> colorWorld = world->toColor();
+    widget->updateImage(gridSize, colorWorld);
 }
 
 /**
  * Sets the generation value in genNumLabel
  * @param gen
- *			The generation that genNumLabel is to be set to.
+ *          The generation that genNumLabel is to be set to.
  */
 void Control::setGenNumLabel(int gen)
-{	
-	stringstream num;
-	num << gen;
-	genNumLabel->setText(num.str().c_str());
+{
+    stringstream num;
+    num << gen;
+    genNumLabel->setText(num.str().c_str());
 }
 
 /**
  * Converts the number in genNumLabel to an int.
  * @return
- *			genNumLabel value as an int.
+ *          genNumLabel value as an int.
  */
 int Control::genNumLabelToInt()
 {
-	string text = genNumLabel->text().toStdString();
-	return atoi(text.c_str());
+    string text = genNumLabel->text().toStdString();
+    return atoi(text.c_str());
 }
 
 /**
@@ -208,10 +208,10 @@ int Control::genNumLabelToInt()
  */
 void Control::simulateOneGen()
 {
-	int gen = genNumLabelToInt();
-	gen++;
-	setGenNumLabel(gen);
+    int gen = genNumLabelToInt();
+    gen++;
+    setGenNumLabel(gen);
 
-	world->simulate(1);
-	updateWidget();
+    world->simulate(1);
+    updateWidget();
 }

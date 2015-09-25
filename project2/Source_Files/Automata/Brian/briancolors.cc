@@ -17,41 +17,41 @@ BrianColors::BrianColors() {}
 /**
  * Takes in a string representation of a brian colors struct
  * and sets the values of ready, firing and default
- * @param brianColorStruct 
- *				The string brian colors struct
+ * @param brianColorStruct
+ *              The string brian colors struct
  */
 BrianColors::BrianColors(string brianColorStruct)
 {
-	map<string, string> colors = AutomatonParser::parse(brianColorStruct);
-	init(convertStrToColor(AutomatonParser::getValue(colors, "Ready", true)),
-		convertStrToColor(AutomatonParser::getValue(colors, "Firing", true)),
-		convertStrToColor(AutomatonParser::getValue(colors, "Refactory", true)));
+    map<string, string> colors = AutomatonParser::parse(brianColorStruct);
+    init(convertStrToColor(AutomatonParser::getValue(colors, "Ready", true)),
+        convertStrToColor(AutomatonParser::getValue(colors, "Firing", true)),
+        convertStrToColor(AutomatonParser::getValue(colors, "Refactory", true)));
 }
 
 /**
  * Constructs brian colors with the given colors
- * @param readyCl 
- *				The ready RGB color. 
- * @param firingCl 
- *				The firing RGB color.	
+ * @param readyCl
+ *              The ready RGB color.
+ * @param firingCl
+ *              The firing RGB color.
  * @param defaultCl
- *				The default RGB color.
+ *              The default RGB color.
  */
 BrianColors::BrianColors(Color readyCl, Color firingCl, Color defaultCl)
 {
-	init(readyCl, firingCl, defaultCl);
+    init(readyCl, firingCl, defaultCl);
 }
 
 /**
  * Copy constructor.
- * @param brianColors 
- *				The brian colors to be copied.
+ * @param brianColors
+ *              The brian colors to be copied.
  */
 BrianColors::BrianColors(const BrianColors &brianColors)
-	: Colors(brianColors)
+    : Colors(brianColors)
 {
-	readyCl = brianColors.readyCl;
-	firingCl = brianColors.firingCl;
+    readyCl = brianColors.readyCl;
+    firingCl = brianColors.firingCl;
 }
 
 
@@ -62,64 +62,64 @@ BrianColors::~BrianColors() {}
 
 /**
  * Overloaded assignment operator.
- * @param brianColors 
- *				The brian colors to be copied.
- * @return 
- *				A copy of given brian colors.
+ * @param brianColors
+ *              The brian colors to be copied.
+ * @return
+ *              A copy of given brian colors.
  */
 BrianColors& BrianColors::operator=(const BrianColors &brianColors)
 {
-	if(this == &brianColors) return *this;
-	Colors::operator=(brianColors);
-	readyCl = brianColors.readyCl;
-	firingCl = brianColors.firingCl;
-	return *this;
+    if(this == &brianColors) return *this;
+    Colors::operator=(brianColors);
+    readyCl = brianColors.readyCl;
+    firingCl = brianColors.firingCl;
+    return *this;
 }
 
 /**
  * Gets the ready color.
- * @return 
- *				A pointer to the ready color.
+ * @return
+ *              A pointer to the ready color.
  */
 Color* BrianColors::getReadyColor()
 {
-	return &readyCl;
+    return &readyCl;
 }
 
 /**
  * Gets the firing color
  * @return
- *				A pointer to the firing color.
+ *              A pointer to the firing color.
  */
 Color* BrianColors::getFiringColor()
 {
-	return &firingCl;
+    return &firingCl;
 }
 
 /**
  * Creates a string brian colors struct in the form of Colors = { Ready = readyCl; Firing = firingCl; Refactory = defaultCl; };
- * @return 
- *				A string representation of brian colors struct
+ * @return
+ *              A string representation of brian colors struct
  */
 string BrianColors::toString()
 {
-	ostringstream ret;
-	ret << "Colors = {\n\t\tReady = " << readyCl.toString() << ";\n\t\tFiring = " << firingCl.toString() << ";\n\t\tRefactory = " << getDefaultColor()->toString() << ";\n\t};";
-	return ret.str();
+    ostringstream ret;
+    ret << "Colors = {\n\t\tReady = " << readyCl.toString() << ";\n\t\tFiring = " << firingCl.toString() << ";\n\t\tRefactory = " << getDefaultColor()->toString() << ";\n\t};";
+    return ret.str();
 }
 
 /**
  * Initializes the colors to the given RGB colors
- * @param readyCl 
- *				The ready RGB color. 
- * @param firingCl 
- *				The firing RGB color.
+ * @param readyCl
+ *              The ready RGB color.
+ * @param firingCl
+ *              The firing RGB color.
  * @param defaultCl
- *				The default RGB color.
+ *              The default RGB color.
  */
 void BrianColors::init(Color readyCl, Color firingCl, Color defaultCl)
 {
-	this->readyCl = readyCl;
-	this->firingCl = firingCl;
-	setDefaultColor(defaultCl);
+    this->readyCl = readyCl;
+    this->firingCl = firingCl;
+    setDefaultColor(defaultCl);
 }
