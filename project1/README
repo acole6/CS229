@@ -19,6 +19,7 @@ struct simp
 };
 typedef struct simp simp_t;
 
+<<<<<<< HEAD
 I created a type called simp_t that represents my simp structure, which has an integer to store the
 width, an integer to store the height and another type I created to called pixel_t that stores a 2D
 array of pixels.
@@ -27,6 +28,14 @@ My pixel_t type is made up of a struct pixel that has an array of unsigned chars
 color.0 is the red channel, 1 is the green channel, 2 is the blue channel and 3 is the alpha channel.
 I originally had 4 separate chars, which made it more obvious what channel was what, but the array
 makes it easier to write code with less lines (i.e. loops and passings the color as a parameter).
+=======
+I created a type called simp_t that represents my simp structure, which has an integer to store the 
+width, an integer to store the height and another type I created called pixel_t that stores a 2D 
+array of pixels.
+
+My pixel_t type is made up of a struct pixel that has an array of unsigned chars to store the pixel 
+color. 0 is the red channel, 1 is the green channel, 2 is the blue channel and 3 is the alpha channel.
+>>>>>>> 769cbd418daa3f645039e3513469fd797f42728f
 
 ########################################################################################################
 # ACT FILE DATA STOREAGE
@@ -59,9 +68,15 @@ stores multiple line structs, as well as the outfile, the meme and the font.
 # FSF FILE DATA STORAGE
 ########################################################################################################
 
+<<<<<<< HEAD
 /*struct to store character data. ch is the character
 position[0] is the x pos, position[1] is the y pos,
 position[2] is the width, and position[3] us the height*/
+=======
+/*struct to store character data. ch is the character,
+position[0] is the x pos, position[1] is the y pos, 
+position[2] is the width, and position[3] is the height*/
+>>>>>>> 769cbd418daa3f645039e3513469fd797f42728f
 struct character
 {
     char ch;
