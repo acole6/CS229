@@ -38,7 +38,7 @@ void get_num_ids(FILE *ifp, int *count)
  * @param ifp the file to read
  * @param action the act struct to store the text
  * ids
-*/
+ */
 void find_text_ids(FILE *ifp, act_t *action)
 {
     int i;
